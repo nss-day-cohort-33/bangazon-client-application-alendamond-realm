@@ -1,0 +1,1 @@
+# python-bangazon-client-template

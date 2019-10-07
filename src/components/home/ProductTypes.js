@@ -1,24 +1,8 @@
-import React, { useEffect, useState, useRef } from "react"
-// import APIManager from "./modules/APIManager"
-// import Attraction from "./Attraction"
-
+import React, { useEffect } from "react"
 
 const ProductTypes = props => {
-//     // Create state variable for itinerary items - useState()
-//     const [itineraryList, setItineraryList] = useState([])
-//     const { toggleDialog, modalIsOpen } = useModal("#dialog--itinerary")
-//     const [currentItinerary, setCurrentItinerary] = useState({})
 
-//     const getProductTypes = () => {
-//         // Fetch data from localhost:8000/itineraryitems
-//         APIManager.getAll("producttypes")
-//         // Store itinerary items in state variable
-//         .then(setProductTypeList)
-//     }
-
-
-
-
+    // const { toggleDialog, modalIsOpen } = useModal("#dialog--itinerary")
 
     // Create useEffect()
     useEffect(() => {
@@ -46,7 +30,6 @@ const ProductTypes = props => {
                     props.productTypeList.map((item) => {
                     return <div>
                         {item.name}
-                        {/* {item.attraction.name} in {item.attraction.area.name} at {item.starttime} */}
                             {/* <button onClick={() => deleteFromItinerary(item.id)}>Delete</button>
                             <button onClick={() => {
                                 setCurrentItinerary(item)

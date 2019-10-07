@@ -5,7 +5,7 @@ const useSimpleAuth = () => {
     const [loggedIn, setIsLoggedIn] = useState(false)
 
     const isAuthenticated = () =>
-        loggedIn || localStorage.getItem("kennywood_token") !== null
+        loggedIn || localStorage.getItem("token") !== null
 
     const register = userInfo => {
         return fetch("http://127.0.0.1:8000/register", {
@@ -19,7 +19,7 @@ const useSimpleAuth = () => {
             .then(res => res.json())
             .then(res => {
                 if ("token" in res) {
-                    localStorage.setItem( "kennywood_token", res.token )
+                    localStorage.setItem( "token", res.token )
                     setIsLoggedIn(true)
                 }
             })
@@ -37,7 +37,7 @@ const useSimpleAuth = () => {
             .then(res => res.json())
             .then(res => {
                 if ("valid" in res && res.valid && "token" in res) {
-                    localStorage.setItem( "kennywood_token", res.token )
+                    localStorage.setItem( "token", res.token )
                     setIsLoggedIn(true)
                 }
             })
@@ -45,7 +45,7 @@ const useSimpleAuth = () => {
 
     const logout = () => {
         setIsLoggedIn(false)
-        localStorage.removeItem("kennywood_token")
+        localStorage.removeItem("token")
     }
 
     return { isAuthenticated, logout, login, register }

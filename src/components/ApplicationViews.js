@@ -3,19 +3,18 @@ import React from "react"
 import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
-// import ParkExplorer from "./home/ParkExplorer"
-// import MyItinerary from "./home/MyItinerary"
+import Product from "./product/Product"
 
 
 const ApplicationViews = () => {
     return (
         <React.Fragment>
 
-            {/* <Route
+            <Route
                 exact path="/" render={props => {
-                    return <ParkExplorer {...props} />
+                    return <Product {...props} />
                 }}
-            /> */}
+            />
 
             <Route
                 path="/register" render={props => {

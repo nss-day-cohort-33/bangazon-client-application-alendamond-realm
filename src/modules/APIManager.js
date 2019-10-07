@@ -3,12 +3,26 @@ const remoteURL = "http://localhost:8000"
 export default Object.create(null, {
   get: {
     value: function(name, id) {
-      return fetch(`${remoteURL}/${name}/${id}`).then(e => e.json())
+      return fetch(`${remoteURL}/${name}/${id}`, {
+        "method": "GET",
+        "headers": {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": `Token ${localStorage.getItem("token")}`
+        },
+      }).then(e => e.json())
     }
   },
   getAll: {
     value: function (name) {
-      return fetch(`${remoteURL}/${name}`).then(e => e.json())
+      return fetch(`${remoteURL}/${name}`, {
+        "method": "GET",
+        "headers": {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": `Token ${localStorage.getItem("token")}`
+        },
+      }).then(e => e.json())
     }
   },
   post: {

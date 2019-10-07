@@ -15,9 +15,11 @@ export default Object.create(null, {
     value: function (name, newPost) {
         console.log("post", name, newPost)
         return fetch(`${remoteURL}/${name}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
+          "method": "POST",
+          "headers": {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Token ${localStorage.getItem("token")}`
           },
           body: JSON.stringify(newPost)
         }).then(data => data.json())
@@ -26,9 +28,11 @@ export default Object.create(null, {
   put: {
     value (name, updatedPost) {
       return fetch(`${remoteURL}/${name}/${updatedPost.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
+       "method": "PUT",
+        "headers": {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Token ${localStorage.getItem("token")}`
         },
         body: JSON.stringify(updatedPost)
       }).then(data => data.json());
@@ -37,13 +41,13 @@ export default Object.create(null, {
   delete: {
     value (name, id) {
       return fetch(`${remoteURL}/${name}/${id}`, {
-        method: "DELETE",
+        "method" :"DELETE",
+        "headers": {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Token ${localStorage.getItem("token")}`
+        }
       }).then(data => data.json());
-    }
-  },
-  getLike: {
-    value (name, word) {
-      return fetch(`${remoteURL}/${name}?username_like=${word}`).then(data => data.json());
     }
   }
 })

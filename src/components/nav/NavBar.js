@@ -24,7 +24,7 @@ const NavBar = props => {
                 {
                     isAuthenticated() ?
                         <li className="nav-item">
-                            <button className="nav-link fakeLink"
+                            <button className="nav-link fakeLink logout-link"
                                 onClick={() => {
                                     logout()
                                     props.history.push({

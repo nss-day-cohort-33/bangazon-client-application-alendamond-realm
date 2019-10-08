@@ -19,7 +19,7 @@ const ApplicationViews = () => {
     const [ordersProductsList, setOrdersProductsList] = useState([])
 
     // const getProducts= () => {
-    //     APIManager.get("products")
+    //     APIManager.getAll("products")
     //     .then(response => response.json())
     //     .then(setProductsList)
     // }
@@ -36,7 +36,6 @@ const ApplicationViews = () => {
     //     .then(setCustomersList)
     // }
 
-<<<<<<< HEAD
     // const getProductTypes= () => {
     //     APIManager.getAll("producttypes")
     //     .then(response => response.json())
@@ -58,43 +57,13 @@ const ApplicationViews = () => {
 
 
     // useEffect(() => {
-    //     getProducts()
+        // getProducts()
     //     getOrders()
     //     getCustomers()
     //     getProductTypes()
     //     getPaymentTypes()
     //     getOrderProducts()
     // }, [])
-=======
-    const getProductTypes= () => {
-        APIManager.getAll("producttypes")
-        .then(response => response.json())
-        .then(setProductTypesList)
-    }
-
-    const getPaymentTypes= () => {
-        APIManager.getAll("paymenttypes")
-        .then(response => response.json())
-        .then(setPaymentTypesList)
-    }
-
-    const getOrderProducts= () => {
-        APIManager.getAll("ordersproducts")
-        .then(response => response.json())
-        .then(setOrdersProductsList)
-    }
-
-
-
-    useEffect(() => {
-        // getProducts()
-        // getOrders()
-        // getCustomers()
-        // getProductTypes()
-        // getPaymentTypes()
-        // getOrderProducts()
-    }, [])
->>>>>>> master
 
     return (
         <React.Fragment>
@@ -146,16 +115,9 @@ const ApplicationViews = () => {
                 }}
             /> */}
 
-
-            <Route
-                path="/products/:id" render={props => {
-                    return (
-                        <>
-                            {/* <h1>Product</h1> */}
-                            <ProductDetail {...props}  productsList={productsList} />
-                        </>
-                    )
-                }}
+            <Route exact path="/products/:productId(\d+)" render={(props) => {
+                return <ProductDetail  {...props} />
+            }}
             />
 
         </React.Fragment>

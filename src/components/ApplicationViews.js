@@ -5,6 +5,7 @@ import Register from "./auth/Register"
 import Login from "./auth/Login"
 import OrderList from "./home/Orders"
 import CustomerProfile from "./home/Profile"
+import HomePage from "./home/HomePage"
 import APIManager from "../modules/APIManager"
 import ProductDetail from "./ProductDetail"
 
@@ -19,11 +20,11 @@ const ApplicationViews = () => {
     const [productTypesList, setProductTypesList] = useState([])
     const [ordersProductsList, setOrdersProductsList] = useState([])
 
-    const getProducts= () => {
-        APIManager.get("products")
-        .then(response => response.json())
-        .then(setProductsList)
-    }
+    // const getProducts= () => {
+    //     APIManager.get("products")
+    //     .then(response => response.json())
+    //     .then(setProductsList)
+    // }
 
     // const getOrders= () => {
     //     APIManager.getAll("orders")
@@ -58,7 +59,7 @@ const ApplicationViews = () => {
 
 
     useEffect(() => {
-        getProducts()
+        // getProducts()
         // getOrders()
         // getCustomers()
         // getProductTypes()
@@ -69,11 +70,11 @@ const ApplicationViews = () => {
     return (
         <React.Fragment>
 
-            {/* <Route
+            <Route
                 exact path="/" render={props => {
-                    return <ParkExplorer {...props} />
+                    return <HomePage {...props} />
                 }}
-            /> */}
+            />
 
             <Route
                 path="/register" render={props => {

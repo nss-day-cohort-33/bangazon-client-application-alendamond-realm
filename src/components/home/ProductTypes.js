@@ -10,7 +10,7 @@ const ProductTypes = props => {
     return (
         <>
             <h2>Products</h2>
-                <h5 className="sell-link"><a href="/product/sell"> + Sell a Product</a></h5>
+                <h5 className="sell-link"><a href="/products/sell"> + Sell a Product</a></h5>
                 <div className="productTypes">
                 {
                     props.productTypesList.map((type) => {

@@ -3,7 +3,7 @@ import React from "react"
 import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
-import Product from "./product/Product"
+import Home from "./home/home"
 
 
 const ApplicationViews = () => {
@@ -12,7 +12,7 @@ const ApplicationViews = () => {
 
             <Route
                 exact path="/" render={props => {
-                    return <Product {...props} />
+                    return <Home {...props} />
                 }}
             />
 

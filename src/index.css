@@ -11,3 +11,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.fakeLink {
+  background: none!important;
+  border: none;
+  padding: .5rem 1rem;
+  font-family: arial, sans-serif;
+  color: #007bff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.fakeLink:hover {
+  text-decoration: underline;
+}
+
+.logout-link {
+  margin-left: 800px;
+}
+
+.navbar1 {
+  margin-bottom: 20px;
+}
+
+li {
+  list-style-type: none;
+ }

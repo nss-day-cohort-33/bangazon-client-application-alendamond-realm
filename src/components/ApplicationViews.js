@@ -5,6 +5,7 @@ import Register from "./auth/Register"
 import Login from "./auth/Login"
 import HomePage from "./home/HomePage"
 import APIManager from "../modules/APIManager"
+import ProductTypes from "./home/ProductTypes"
 import ProductDetail from "./Products/ProductDetail"
 
 
@@ -18,11 +19,10 @@ const ApplicationViews = () => {
     const [productTypesList, setProductTypesList] = useState([])
     const [ordersProductsList, setOrdersProductsList] = useState([])
 
-    // const getProducts= () => {
-    //     APIManager.getAll("products")
-    //     .then(response => response.json())
-    //     .then(setProductsList)
-    // }
+    const getProducts= () => {
+        APIManager.getAll("products")
+        .then(setProductsList)
+    }
 
     // const getOrders= () => {
     //     APIManager.getAll("orders")
@@ -36,11 +36,10 @@ const ApplicationViews = () => {
     //     .then(setCustomersList)
     // }
 
-    // const getProductTypes= () => {
-    //     APIManager.getAll("producttypes")
-    //     .then(response => response.json())
-    //     .then(setProductTypesList)
-    // }
+    const getProductTypes= () => {
+        APIManager.getAll("producttypes")
+        .then(setProductTypesList)
+    }
 
     // const getPaymentTypes= () => {
     //     APIManager.getAll("paymenttypes")
@@ -54,16 +53,14 @@ const ApplicationViews = () => {
     //     .then(setOrdersProductsList)
     // }
 
-
-
-    // useEffect(() => {
-        // getProducts()
-    //     getOrders()
-    //     getCustomers()
-    //     getProductTypes()
-    //     getPaymentTypes()
-    //     getOrderProducts()
-    // }, [])
+    useEffect(() => {
+        getProducts()
+        // getOrders()
+        // getCustomers()
+        getProductTypes()
+        // getPaymentTypes()
+        // getOrderProducts()
+    }, [])
 
     return (
         <React.Fragment>
@@ -85,13 +82,25 @@ const ApplicationViews = () => {
                     return <Login {...props} />
                 }}
             />
+
             {/* <Route
                 path="/orders" render={props => {
-                    return <Order {...props}  ordersList={ordersList} />
+                    return <Orders {...props}  ordersList={ordersList} />
+                }}
+            /> */}
+
+            <Route
+                exact path="/products" render={props => {
+                    return (
+                        <>
+                            {/* <h1>Product Types</h1> */}
+                            <ProductTypes {...props} productTypesList={productTypesList} productsList={productsList} />
+                        </>
+                    )
                 }}
             />
 
-            <Route
+            {/* <Route
                 path="/paymenttypes" render={props => {
                     return <PaymentTypes {...props}  paymentTypesList={paymentTypesList} />
                 }}
@@ -101,13 +110,6 @@ const ApplicationViews = () => {
                     return <Customers {...props}  customersList={customersList} />
                 }}
             />
-
-            <Route
-                path="/producttypes" render={props => {
-                    return <ProductTypes {...props}  productTypesList={productTypesList} />
-                }}
-            />
-
 
             <Route
                 path="/ordersproducts" render={props => {

@@ -17,52 +17,52 @@ const ApplicationViews = () => {
     const [productTypesList, setProductTypesList] = useState([])
     const [ordersProductsList, setOrdersProductsList] = useState([])
 
-    const getProducts= () => {
-        APIManager.get("products")
-        .then(response => response.json())
-        .then(setProductsList)
-    }
+    // const getProducts= () => {
+    //     APIManager.get("products")
+    //     .then(response => response.json())
+    //     .then(setProductsList)
+    // }
 
-    const getOrders= () => {
-        APIManager.getAll("orders")
-        .then(response => response.json())
-        .then(setOrdersList)
-    }
+    // const getOrders= () => {
+    //     APIManager.getAll("orders")
+    //     .then(response => response.json())
+    //     .then(setOrdersList)
+    // }
 
-    const getCustomers= () => {
-        APIManager.getAll("customers")
-        .then(response => response.json())
-        .then(setCustomersList)
-    }
+    // const getCustomers= () => {
+    //     APIManager.getAll("customers")
+    //     .then(response => response.json())
+    //     .then(setCustomersList)
+    // }
 
-    const getProductTypes= () => {
-        APIManager.getAll("producttypes")
-        .then(response => response.json())
-        .then(setProductTypesList)
-    }
+    // const getProductTypes= () => {
+    //     APIManager.getAll("producttypes")
+    //     .then(response => response.json())
+    //     .then(setProductTypesList)
+    // }
 
-    const getPaymentTypes= () => {
-        APIManager.getAll("paymenttypes")
-        .then(response => response.json())
-        .then(setPaymentTypesList)
-    }
+    // const getPaymentTypes= () => {
+    //     APIManager.getAll("paymenttypes")
+    //     .then(response => response.json())
+    //     .then(setPaymentTypesList)
+    // }
 
-    const getOrderProducts= () => {
-        APIManager.getAll("ordersproducts")
-        .then(response => response.json())
-        .then(setOrdersProductsList)
-    }
+    // const getOrderProducts= () => {
+    //     APIManager.getAll("ordersproducts")
+    //     .then(response => response.json())
+    //     .then(setOrdersProductsList)
+    // }
 
 
 
-    useEffect(() => {
-        getProducts()
-        getOrders()
-        getCustomers()
-        getProductTypes()
-        getPaymentTypes()
-        getOrderProducts()
-    }, [])
+    // useEffect(() => {
+    //     getProducts()
+    //     getOrders()
+    //     getCustomers()
+    //     getProductTypes()
+    //     getPaymentTypes()
+    //     getOrderProducts()
+    // }, [])
 
     return (
         <React.Fragment>
@@ -84,35 +84,35 @@ const ApplicationViews = () => {
                     return <Login {...props} />
                 }}
             />
-            <Route
+            {/* <Route
                 path="/orders" render={props => {
-                    return <Login {...props}  ordersList={ordersList} />
+                    return <Order {...props}  ordersList={ordersList} />
                 }}
             />
 
             <Route
                 path="/paymenttypes" render={props => {
-                    return <Login {...props}  paymentTypesList={paymentTypesList} />
+                    return <PaymentTypes {...props}  paymentTypesList={paymentTypesList} />
                 }}
             />
             <Route
                 path="/customers" render={props => {
-                    return <Login {...props}  customersList={customersList} />
+                    return <Customers {...props}  customersList={customersList} />
                 }}
             />
 
             <Route
                 path="/producttypes" render={props => {
-                    return <Login {...props}  productTypesList={productTypesList} />
+                    return <ProductTypes {...props}  productTypesList={productTypesList} />
                 }}
             />
 
 
             <Route
                 path="/ordersproducts" render={props => {
-                    return <Login {...props}  ordersProductsList={ordersProductsList} />
+                    return <OrderProducts {...props}  ordersProductsList={ordersProductsList} />
                 }}
-            />
+            /> */}
 
 
             <Route

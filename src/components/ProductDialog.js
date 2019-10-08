@@ -6,7 +6,7 @@ export default ({toggleDialog, callback}) => {
 
     return (
         <dialog id="dialog--itinerary" className="dialog--time">
-            <label htmlFor="starttime">Name</label>
+            <label htmlFor="name">Name</label>
             <input ref={name} type="text" name="name" autoFocus required />
 
             <button onClick={() => {

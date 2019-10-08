@@ -19,9 +19,10 @@ const ProductDetail = props => {
             {
                 <section className="product-details">
                     <h3>{singleProduct.name}</h3>
-                    <h4>{singleProduct.price}</h4>
+                    <p>${singleProduct.price}</p>
                     <p>{singleProduct.description}</p>
-                    <h4>Quantity{singleProduct.quantity}</h4>
+                    <p>Quantity: {singleProduct.quantity}</p>
+                    <br/>
                     <button>Add Order</button>
                 </section>
             }

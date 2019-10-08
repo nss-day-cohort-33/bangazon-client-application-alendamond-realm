@@ -3,6 +3,7 @@ import React from "react"
 import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
+import AddPaymentTypes from "./paymenttypes/AddPaymentTypes"
 // import ParkExplorer from "./home/ParkExplorer"
 // import MyItinerary from "./home/MyItinerary"
 
@@ -16,6 +17,12 @@ const ApplicationViews = () => {
                     return <ParkExplorer {...props} />
                 }}
             /> */}
+
+            <Route
+                exact path="/" render={props => {
+                    return <AddPaymentTypes {...props} />
+                }}
+            />
 
             <Route
                 path="/register" render={props => {

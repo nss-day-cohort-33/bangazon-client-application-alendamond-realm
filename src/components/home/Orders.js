@@ -4,20 +4,19 @@ import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
 
 const OrderList = props => {
   const [customerOrders, setOrders] = useState([]);
-//   const []
   const { isAuthenticated } = useSimpleAuth();
 
-  const currentUserId =
 
   const getOrders = () => {
-    if (isAuthenticated()) {
-      APIManager.get("orders", )
-      .then(allOrders => {
-          setOrders(allOrders);
-          console.log("orders", allOrders)
-      });
-    }
-  };
+      if (isAuthenticated()) {
+          APIManager.getAll("orders")
+          .then(allOrders => {
+              setOrders(allOrders);
+              console.log("orders", allOrders)
+            });
+        }
+    };
+
 
   useEffect(getOrders, []);
 

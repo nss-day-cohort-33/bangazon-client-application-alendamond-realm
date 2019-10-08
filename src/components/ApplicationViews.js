@@ -3,7 +3,7 @@ import React,  { useState, useEffect } from "react"
 import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
-import Home from "./home/home"
+import HomePage from "./home/HomePage"
 import APIManager from "../modules/APIManager"
 import ProductDetail from "./ProductDetail"
 
@@ -18,23 +18,23 @@ const ApplicationViews = () => {
     const [productTypesList, setProductTypesList] = useState([])
     const [ordersProductsList, setOrdersProductsList] = useState([])
 
-    const getProducts= () => {
-        APIManager.get("products")
-        .then(response => response.json())
-        .then(setProductsList)
-    }
+    // const getProducts= () => {
+    //     APIManager.get("products")
+    //     .then(response => response.json())
+    //     .then(setProductsList)
+    // }
 
-    const getOrders= () => {
-        APIManager.getAll("orders")
-        .then(response => response.json())
-        .then(setOrdersList)
-    }
+    // const getOrders= () => {
+    //     APIManager.getAll("orders")
+    //     .then(response => response.json())
+    //     .then(setOrdersList)
+    // }
 
-    const getCustomers= () => {
-        APIManager.getAll("customers")
-        .then(response => response.json())
-        .then(setCustomersList)
-    }
+    // const getCustomers= () => {
+    //     APIManager.getAll("customers")
+    //     .then(response => response.json())
+    //     .then(setCustomersList)
+    // }
 
     const getProductTypes= () => {
         APIManager.getAll("producttypes")
@@ -57,12 +57,12 @@ const ApplicationViews = () => {
 
 
     useEffect(() => {
-        getProducts()
-        getOrders()
-        getCustomers()
-        getProductTypes()
-        getPaymentTypes()
-        getOrderProducts()
+        // getProducts()
+        // getOrders()
+        // getCustomers()
+        // getProductTypes()
+        // getPaymentTypes()
+        // getOrderProducts()
     }, [])
 
     return (
@@ -70,7 +70,7 @@ const ApplicationViews = () => {
 
             <Route
                 exact path="/" render={props => {
-                    return <Home {...props} />
+                    return <HomePage {...props} />
                 }}
             />
 

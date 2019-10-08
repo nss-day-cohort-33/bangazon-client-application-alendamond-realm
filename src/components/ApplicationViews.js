@@ -5,7 +5,7 @@ import Register from "./auth/Register"
 import Login from "./auth/Login"
 import HomePage from "./home/HomePage"
 import APIManager from "../modules/APIManager"
-import ProductDetail from "./ProductDetail"
+import ProductDetail from "./Products/ProductDetail"
 
 
 const ApplicationViews = () => {
@@ -19,7 +19,7 @@ const ApplicationViews = () => {
     const [ordersProductsList, setOrdersProductsList] = useState([])
 
     // const getProducts= () => {
-    //     APIManager.get("products")
+    //     APIManager.getAll("products")
     //     .then(response => response.json())
     //     .then(setProductsList)
     // }
@@ -36,34 +36,34 @@ const ApplicationViews = () => {
     //     .then(setCustomersList)
     // }
 
-    const getProductTypes= () => {
-        APIManager.getAll("producttypes")
-        .then(response => response.json())
-        .then(setProductTypesList)
-    }
+    // const getProductTypes= () => {
+    //     APIManager.getAll("producttypes")
+    //     .then(response => response.json())
+    //     .then(setProductTypesList)
+    // }
 
-    const getPaymentTypes= () => {
-        APIManager.getAll("paymenttypes")
-        .then(response => response.json())
-        .then(setPaymentTypesList)
-    }
+    // const getPaymentTypes= () => {
+    //     APIManager.getAll("paymenttypes")
+    //     .then(response => response.json())
+    //     .then(setPaymentTypesList)
+    // }
 
-    const getOrderProducts= () => {
-        APIManager.getAll("ordersproducts")
-        .then(response => response.json())
-        .then(setOrdersProductsList)
-    }
+    // const getOrderProducts= () => {
+    //     APIManager.getAll("ordersproducts")
+    //     .then(response => response.json())
+    //     .then(setOrdersProductsList)
+    // }
 
 
 
-    useEffect(() => {
+    // useEffect(() => {
         // getProducts()
-        // getOrders()
-        // getCustomers()
-        // getProductTypes()
-        // getPaymentTypes()
-        // getOrderProducts()
-    }, [])
+    //     getOrders()
+    //     getCustomers()
+    //     getProductTypes()
+    //     getPaymentTypes()
+    //     getOrderProducts()
+    // }, [])
 
     return (
         <React.Fragment>
@@ -85,46 +85,39 @@ const ApplicationViews = () => {
                     return <Login {...props} />
                 }}
             />
-            <Route
+            {/* <Route
                 path="/orders" render={props => {
-                    return <Login {...props}  ordersList={ordersList} />
+                    return <Order {...props}  ordersList={ordersList} />
                 }}
             />
 
             <Route
                 path="/paymenttypes" render={props => {
-                    return <Login {...props}  paymentTypesList={paymentTypesList} />
+                    return <PaymentTypes {...props}  paymentTypesList={paymentTypesList} />
                 }}
             />
             <Route
                 path="/customers" render={props => {
-                    return <Login {...props}  customersList={customersList} />
+                    return <Customers {...props}  customersList={customersList} />
                 }}
             />
 
             <Route
                 path="/producttypes" render={props => {
-                    return <Login {...props}  productTypesList={productTypesList} />
+                    return <ProductTypes {...props}  productTypesList={productTypesList} />
                 }}
             />
 
 
             <Route
                 path="/ordersproducts" render={props => {
-                    return <Login {...props}  ordersProductsList={ordersProductsList} />
+                    return <OrderProducts {...props}  ordersProductsList={ordersProductsList} />
                 }}
-            />
+            /> */}
 
-
-            <Route
-                path="/products/:id" render={props => {
-                    return (
-                        <>
-                            {/* <h1>Product</h1> */}
-                            <ProductDetail {...props}  productsList={productsList} />
-                        </>
-                    )
-                }}
+            <Route exact path="/products/:productId(\d+)" render={(props) => {
+                return <ProductDetail  {...props} />
+            }}
             />
 
         </React.Fragment>

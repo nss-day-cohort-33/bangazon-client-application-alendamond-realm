@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import APIManager from "../../modules/APIManager"
 import { Link } from 'react-router-dom'
+
 const HomePage = props => {
     const [products, setProducts] = useState([])
 
@@ -10,6 +11,7 @@ const HomePage = props => {
                 setProducts(productItem)
             })
     }
+
  useEffect(get20Products, [])
  return (
      <>
@@ -20,6 +22,7 @@ const HomePage = props => {
             return(<div key={item.id} className={`productId-${item.id}`}>
                  <p>{item.name}</p> <p>${item.price}</p>
                 <Link className="nav-link" to={`/products/${item.id}`}>
+
                 <p>Details</p>
                 </Link>
                 </div>

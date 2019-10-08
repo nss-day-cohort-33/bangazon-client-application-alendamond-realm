@@ -29,3 +29,11 @@ code {
 .logout-link {
   margin-left: 800px;
 }
+
+.navbar1 {
+  margin-bottom: 20px;
+}
+
+li {
+  list-style-type: none;
+ }

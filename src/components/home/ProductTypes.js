@@ -1,4 +1,5 @@
 import React, { useEffect } from "react"
+import { Link } from 'react-router-dom'
 
 const ProductTypes = props => {
 
@@ -20,9 +21,10 @@ const ProductTypes = props => {
                                     .slice(0, 4).map((product) => {
                                         console.log(product)
                                         return (
-                                           <li>
-                                               {product.name}
-                                           </li>
+                                            <Link className="nav-link" to={`/products/${product.id}`}>
+                                                <li>{product.name}</li>
+                                            </Link>
+
                                        )
                                     })
                                }

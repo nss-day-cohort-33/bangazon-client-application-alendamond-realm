@@ -3,10 +3,10 @@ import React,  { useState, useEffect } from "react"
 import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
+import HomePage from "./home/HomePage"
 import APIManager from "../modules/APIManager"
 import ProductTypes from "./home/ProductTypes"
-// import MyItinerary from "./home/MyItinerary"
-import ProductDetail from "./ProductDetail"
+import ProductDetail from "./Products/ProductDetail"
 
 
 const ApplicationViews = () => {
@@ -53,8 +53,6 @@ const ApplicationViews = () => {
     //     .then(setOrdersProductsList)
     // }
 
-
-
     useEffect(() => {
         getProducts()
         // getOrders()
@@ -67,11 +65,11 @@ const ApplicationViews = () => {
     return (
         <React.Fragment>
 
-            {/* <Route
+            <Route
                 exact path="/" render={props => {
-                    return <ParkExplorer {...props} />
+                    return <HomePage {...props} />
                 }}
-            /> */}
+            />
 
             <Route
                 path="/register" render={props => {
@@ -84,6 +82,7 @@ const ApplicationViews = () => {
                     return <Login {...props} />
                 }}
             />
+
             {/* <Route
                 path="/orders" render={props => {
                     return <Orders {...props}  ordersList={ordersList} />
@@ -91,7 +90,7 @@ const ApplicationViews = () => {
             /> */}
 
             <Route
-                path="/products" render={props => {
+                exact path="/products" render={props => {
                     return (
                         <>
                             {/* <h1>Product Types</h1> */}
@@ -101,39 +100,27 @@ const ApplicationViews = () => {
                 }}
             />
 
-            <Route
-                path="/products/:id" render={props => {
-                    return (
-                        <>
-                            {/* <h1>Product</h1> */}
-                            <ProductDetail {...props}  productsList={productsList} />
-                        </>
-                    )
-                }}
-            />
-
             {/* <Route
                 path="/paymenttypes" render={props => {
-                    return <Login {...props}  paymentTypesList={paymentTypesList} />
+                    return <PaymentTypes {...props}  paymentTypesList={paymentTypesList} />
                 }}
             />
             <Route
                 path="/customers" render={props => {
-                    return <Login {...props}  customersList={customersList} />
-                }}
-            />
-
-            <Route
-                path="/producttypes" render={props => {
-                    return <Login {...props}  productTypesList={productTypesList} />
+                    return <Customers {...props}  customersList={customersList} />
                 }}
             />
 
             <Route
                 path="/ordersproducts" render={props => {
-                    return <Login {...props}  ordersProductsList={ordersProductsList} />
+                    return <OrderProducts {...props}  ordersProductsList={ordersProductsList} />
                 }}
             /> */}
+
+            <Route exact path="/products/:productId(\d+)" render={(props) => {
+                return <ProductDetail  {...props} />
+            }}
+            />
 
         </React.Fragment>
     )

@@ -12,9 +12,21 @@ const getCustomer = () => {
         .then(customer => {
             setProfile(customer);
             console.log("customer", customer)
-          });
+        })
+        .then((response) => response.json())
       }
   };
+
+
+//   const getOrders = () => {
+//     if (isAuthenticated()) {
+//         APIManager.getAll("orders")
+//         .then(allOrders => {
+//             setOrders(allOrders);
+//             console.log("orders", allOrders)
+//           });
+//       }
+//   };
 
   useEffect(() =>
                    {getCustomer()

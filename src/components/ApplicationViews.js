@@ -7,7 +7,7 @@ import OrderList from "./home/Orders"
 import CustomerProfile from "./home/Profile"
 import HomePage from "./home/HomePage"
 import APIManager from "../modules/APIManager"
-import ProductDetail from "./ProductDetail"
+import ProductDetail from "./Products/ProductDetail"
 
 
 const ApplicationViews = () => {
@@ -21,7 +21,7 @@ const ApplicationViews = () => {
     const [ordersProductsList, setOrdersProductsList] = useState([])
 
     // const getProducts= () => {
-    //     APIManager.get("products")
+    //     APIManager.getAll("products")
     //     .then(response => response.json())
     //     .then(setProductsList)
     // }
@@ -58,14 +58,14 @@ const ApplicationViews = () => {
 
 
 
-    useEffect(() => {
+    // useEffect(() => {
         // getProducts()
-        // getOrders()
-        // getCustomers()
-        // getProductTypes()
-        // getPaymentTypes()
-        // getOrderProducts()
-    }, [])
+    //     getOrders()
+    //     getCustomers()
+    //     getProductTypes()
+    //     getPaymentTypes()
+    //     getOrderProducts()
+    // }, [])
 
     return (
         <React.Fragment>
@@ -113,21 +113,14 @@ const ApplicationViews = () => {
 
            {/* <Route
                 path="/ordersproducts" render={props => {
-                    return <Login {...props}  ordersProductsList={ordersProductsList} />
+                    return <OrderProducts {...props}  ordersProductsList={ordersProductsList} />
                 }}
+            /> */}
+
+            <Route exact path="/products/:productId(\d+)" render={(props) => {
+                return <ProductDetail  {...props} />
+            }}
             />
-
-
-            <Route
-                path="/products/:id" render={props => {
-                    return (
-                        <>
-                            {/* <h1>Product</h1> */}
-                            {/* <ProductDetail {...props}  productsList={productsList} />
-                        </>
-                    )
-                }}
-            />   */}
 
         </React.Fragment>
     )

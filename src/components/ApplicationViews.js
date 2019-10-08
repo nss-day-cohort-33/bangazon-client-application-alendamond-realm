@@ -7,6 +7,7 @@ import OrderList from "./home/Orders"
 import CustomerProfile from "./home/Profile"
 import HomePage from "./home/HomePage"
 import APIManager from "../modules/APIManager"
+import ProductTypes from "./home/ProductTypes"
 import ProductDetail from "./Products/ProductDetail"
 
 
@@ -20,11 +21,10 @@ const ApplicationViews = () => {
     const [productTypesList, setProductTypesList] = useState([])
     const [ordersProductsList, setOrdersProductsList] = useState([])
 
-    // const getProducts= () => {
-    //     APIManager.getAll("products")
-    //     .then(response => response.json())
-    //     .then(setProductsList)
-    // }
+    const getProducts= () => {
+        APIManager.getAll("products")
+        .then(setProductsList)
+    }
 
     // const getOrders= () => {
     //     APIManager.getAll("orders")
@@ -38,11 +38,10 @@ const ApplicationViews = () => {
     //     .then(setCustomersList)
     // }
 
-    // const getProductTypes= () => {
-    //     APIManager.getAll("producttypes")
-    //     .then(response => response.json())
-    //     .then(setProductTypesList)
-    // }
+    const getProductTypes= () => {
+        APIManager.getAll("producttypes")
+        .then(setProductTypesList)
+    }
 
     // const getPaymentTypes= () => {
     //     APIManager.getAll("paymenttypes")
@@ -56,16 +55,14 @@ const ApplicationViews = () => {
     //     .then(setOrdersProductsList)
     // }
 
-
-
-    // useEffect(() => {
-        // getProducts()
-    //     getOrders()
-    //     getCustomers()
-    //     getProductTypes()
-    //     getPaymentTypes()
-    //     getOrderProducts()
-    // }, [])
+    useEffect(() => {
+        getProducts()
+        // getOrders()
+        // getCustomers()
+        getProductTypes()
+        // getPaymentTypes()
+        // getOrderProducts()
+    }, [])
 
     return (
         <React.Fragment>
@@ -96,8 +93,30 @@ const ApplicationViews = () => {
                             <OrderList {...props} />
                         </>
                     )
+                    }}
+            />
+
+            <Route
+                exact path="/products" render={props => {
+                    return (
+                        <>
+                            {/* <h1>Product Types</h1> */}
+                            <ProductTypes {...props} productTypesList={productTypesList} productsList={productsList} />
+                        </>
+                    )
                 }}
             />
+
+            {/* <Route
+                path="/paymenttypes" render={props => {
+                    return <PaymentTypes {...props}  paymentTypesList={paymentTypesList} />
+                }}
+            />
+            <Route
+                path="/customers" render={props => {
+                    return <Customers {...props}  customersList={customersList} />
+                }}
+            /> */}
 
             <Route
                 path="/myaccount" render={props => {

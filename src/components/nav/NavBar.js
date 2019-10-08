@@ -7,7 +7,7 @@ const NavBar = props => {
     const { isAuthenticated, logout } = useSimpleAuth()
 
     return (
-        <nav className="navbar navbar-light light-blue flex-md-nowrap p-0 shadow">
+        <nav className="navbar navbar-light light-blue flex-md-nowrap p-0 shadow navbar1">
             <ul className="nav nav-pills nav-fill">
                 <li className="nav-item">
                     <Link className="nav-link" to="/">Home</Link>
@@ -24,7 +24,7 @@ const NavBar = props => {
                 {
                     isAuthenticated() ?
                         <li className="nav-item">
-                            <button className="nav-link fakeLink"
+                            <button className="nav-link fakeLink logout-link"
                                 onClick={() => {
                                     logout()
                                     props.history.push({

@@ -3,6 +3,7 @@ import React,  { useState, useEffect } from "react"
 import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
+import HomePage from "./home/HomePage"
 import APIManager from "../modules/APIManager"
 import ProductDetail from "./Products/ProductDetail"
 
@@ -35,6 +36,7 @@ const ApplicationViews = () => {
     //     .then(setCustomersList)
     // }
 
+<<<<<<< HEAD
     // const getProductTypes= () => {
     //     APIManager.getAll("producttypes")
     //     .then(response => response.json())
@@ -63,15 +65,45 @@ const ApplicationViews = () => {
     //     getPaymentTypes()
     //     getOrderProducts()
     // }, [])
+=======
+    const getProductTypes= () => {
+        APIManager.getAll("producttypes")
+        .then(response => response.json())
+        .then(setProductTypesList)
+    }
+
+    const getPaymentTypes= () => {
+        APIManager.getAll("paymenttypes")
+        .then(response => response.json())
+        .then(setPaymentTypesList)
+    }
+
+    const getOrderProducts= () => {
+        APIManager.getAll("ordersproducts")
+        .then(response => response.json())
+        .then(setOrdersProductsList)
+    }
+
+
+
+    useEffect(() => {
+        // getProducts()
+        // getOrders()
+        // getCustomers()
+        // getProductTypes()
+        // getPaymentTypes()
+        // getOrderProducts()
+    }, [])
+>>>>>>> master
 
     return (
         <React.Fragment>
 
-            {/* <Route
+            <Route
                 exact path="/" render={props => {
-                    return <ParkExplorer {...props} />
+                    return <HomePage {...props} />
                 }}
-            /> */}
+            />
 
             <Route
                 path="/register" render={props => {

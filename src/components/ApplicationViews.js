@@ -3,8 +3,7 @@ import React from "react"
 import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
-// import ParkExplorer from "./home/ParkExplorer"
-// import MyItinerary from "./home/MyItinerary"
+import OrderList from "./home/Orders"
 
 
 const ApplicationViews = () => {
@@ -29,18 +28,18 @@ const ApplicationViews = () => {
                 }}
             />
 
-            {/* <Route
-                path="/areas" render={props => {
+            <Route
+                path="/orders" render={props => {
                     return (
                         <>
-                            <h1>Areas</h1>
-                            <img className="swings" src={require('./home/swings.jpeg')} alt="My Dog" />
+                            <h1>Orders</h1>
+                            <OrderList {...props} />
                         </>
                     )
                 }}
             />
 
-            <Route
+            {/* <Route
                 path="/attractions" render={props => {
                     return (
                         <>
@@ -61,7 +60,7 @@ const ApplicationViews = () => {
                         </>
                     )
                 }}
-            /> */}
+            />  */}
 
         </React.Fragment>
     )

@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
 import OrderList from "./home/Orders"
+import CustomerProfile from "./home/Profile"
 import APIManager from "../modules/APIManager"
 import ProductDetail from "./ProductDetail"
 
@@ -97,19 +98,19 @@ const ApplicationViews = () => {
                 }}
             />
 
-            {/* <Route
-                path="/attractions" render={props => {
+            <Route
+                path="/myaccount" render={props => {
                     return (
                         <>
-                            <h1>Attractions</h1>
-                            <img className="swings" src={require('./home/swings.jpeg')} alt="My Dog" />
+                            <h1>My Account</h1>
+                            <CustomerProfile {...props} />
                         </>
                     )
                 }}
             />
 
 
-            <Route
+           {/* <Route
                 path="/ordersproducts" render={props => {
                     return <Login {...props}  ordersProductsList={ordersProductsList} />
                 }}

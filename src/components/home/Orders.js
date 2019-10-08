@@ -4,6 +4,7 @@ import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
 
 const OrderList = props => {
   const [customerOrders, setOrders] = useState([]);
+  const [orderProducts, setOrderProducts] = useState([]);
   const { isAuthenticated } = useSimpleAuth();
 
 
@@ -17,8 +18,21 @@ const OrderList = props => {
         }
     };
 
+  const getOrderProducts = () => {
+      if (isAuthenticated()) {
+          APIManager.getAll("orderproduct")
+          .then(allOrderProducts => {
+              setOrderProducts(allOrderProducts)
+              console.log("orderProducts", allOrderProducts)
+          })
+      }
+  }
 
-  useEffect(getOrders, []);
+
+  useEffect(() =>
+                   {getOrderProducts()
+                   getOrders()
+                   },  []);
 
   return (
     <>
@@ -32,6 +46,14 @@ const OrderList = props => {
             </div>
           );
         })}
+                        {orderProducts.map(product => {return(
+                            <div>
+                            <li>
+                                <ol>{product.product_id}</ol>
+                            </li>
+                            </div>
+                        )
+                        })}
       </main>
     </>
   );

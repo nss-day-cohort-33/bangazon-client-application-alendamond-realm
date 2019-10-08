@@ -3,7 +3,6 @@ import React from "react"
 const ProductDetail = props => {
     return (
         <>
-            {console.log(props.product)}
             {
 
                 <section className="product-details">

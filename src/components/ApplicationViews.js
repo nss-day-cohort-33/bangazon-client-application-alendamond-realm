@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
 import APIManager from "../modules/APIManager"
-import ProductDetail from "./ProductDetail"
+import ProductDetail from "./Products/ProductDetail"
 
 
 const ApplicationViews = () => {

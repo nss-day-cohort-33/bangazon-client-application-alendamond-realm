@@ -3,41 +3,49 @@ import React, { useEffect, useState } from "react";
 import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
 
 const CustomerProfile = props => {
-    const [customerProfile, setProfile] = useState([]);
-    const { isAuthenticated } = useSimpleAuth();
+  const [customerProfile, setProfile] = useState([]);
+  const { isAuthenticated } = useSimpleAuth();
 
-const getCustomer = () => {
+  const getCustomer = () => {
     if (isAuthenticated()) {
-        APIManager.getAll("customers")
-        .then(customer => {
-            setProfile(customer);
-            console.log("customer", customer)
-        })
-      }
+      APIManager.getAll("customers").then(customer => {
+        setProfile(customer);
+        console.log("customer", customer);
+      });
+    }
   };
 
-
-  useEffect(() =>
-                   {getCustomer()
-                   },  []);
+  useEffect(() => {
+    getCustomer();
+  }, []);
 
   return (
     <>
       <main className="explorer">
         {customerProfile.map(profile => {
-            if (profile.user_id == localStorage.getItem("customer_id")) {
-          return (
-            <div>
-              <ul>
-                <li>{profile.address}</li>
-              </ul>
-            </div>
-            )}
+          if (profile.user_id == localStorage.getItem("customer_id")) {
+            return (
+              <div>
+                <ul>
+                  <li>{profile.user.first_name}</li>
+                  <li>{profile.user.last_name}</li>
+                  <li>{profile.user.email}</li>
+                  <li>{profile.user.phone_number}</li>
+                  <li>{profile.address}</li>
+                </ul>
+                <a href="/payment/options">
+                  <h4>Payment Options</h4>
+                </a>
+                <a href="/payment/create">
+                  <h4>Add New Payment Type</h4>
+                </a>
+              </div>
+            );
+          }
         })}
       </main>
     </>
   );
 };
 
-
-export default CustomerProfile
+export default CustomerProfile;

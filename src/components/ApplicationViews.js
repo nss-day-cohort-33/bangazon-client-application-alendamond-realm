@@ -11,6 +11,7 @@ import ProductTypes from "./home/ProductTypes"
 import ProductDetail from "./Products/ProductDetail"
 
 
+
 const ApplicationViews = () => {
 
 
@@ -43,11 +44,11 @@ const ApplicationViews = () => {
         .then(setProductTypesList)
     }
 
-    // const getPaymentTypes= () => {
-    //     APIManager.getAll("paymenttypes")
-    //     .then(response => response.json())
-    //     .then(setPaymentTypesList)
-    // }
+    const getPaymentTypes= () => {
+        APIManager.getAll("paymenttypes")
+        .then(response => response.json())
+        .then(setPaymentTypesList)
+    }
 
     // const getOrderProducts= () => {
     //     APIManager.getAll("ordersproducts")
@@ -60,7 +61,7 @@ const ApplicationViews = () => {
         // getOrders()
         // getCustomers()
         getProductTypes()
-        // getPaymentTypes()
+        getPaymentTypes()
         // getOrderProducts()
     }, [])
 
@@ -107,12 +108,12 @@ const ApplicationViews = () => {
                 }}
             />
 
-            {/* <Route
+            <Route
                 path="/paymenttypes" render={props => {
                     return <PaymentTypes {...props}  paymentTypesList={paymentTypesList} />
                 }}
             />
-         */}
+
 
             <Route
                 path="/myaccount" render={props => {

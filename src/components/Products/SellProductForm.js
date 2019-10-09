@@ -58,7 +58,7 @@ const type = useRef()
         ref={type}
         required />
         </div>
-      <button type="submit">Add to product List</button>
+      <button onClick={addProduct}>Add to product List</button>
     </form>
   </React.Fragment>
   )

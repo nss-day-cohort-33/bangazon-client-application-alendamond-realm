@@ -6,6 +6,7 @@ import Login from "./auth/Login"
 import OrderList from "./orders/Orders"
 import CustomerProfile from "./profile/Profile"
 import AddPaymentTypes from "./paymenttypes/AddPaymentTypes"
+import DeletePaymentTypes from "./paymenttypes/DeletePaymentTypes"
 import HomePage from "./home/HomePage"
 import APIManager from "../modules/APIManager"
 import ProductTypes from "./home/ProductTypes"
@@ -57,6 +58,12 @@ const ApplicationViews = () => {
             />
 
             <Route
+                exact path="/deletepayment" render={props => {
+                    return <DeletePaymentTypes {...props} />
+                }}
+            />
+
+            <Route
                 path="/register" render={props => {
                     return <Register {...props} />
                 }}
@@ -76,7 +83,7 @@ const ApplicationViews = () => {
                             <OrderList {...props} />
                         </>
                     )
-                    }}
+                }}
             />
 
             <Route
@@ -104,7 +111,7 @@ const ApplicationViews = () => {
             />
 
 
-           {/* <Route
+            {/* <Route
                 path="/ordersproducts" render={props => {
                     return <OrderProducts {...props}  ordersProductsList={ordersProductsList} />
                 }}

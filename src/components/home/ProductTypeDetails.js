@@ -2,26 +2,34 @@ import React, {useState, useEffect } from "react"
 import { Link } from 'react-router-dom'
 import APIManager from "../../modules/APIManager";
 
+//Author: Amber Gooch
+//Purpose: Allow a user to view full list of products by category
+//Methods: GET
+
 const ProductTypeDetails = props => {
 
     const [singleType, setType] = useState([])
     const [productsList, setProductsList] = useState([])
 
+    // Gets a single product type by its product type id and sets state
     const getSingleType = () => {
         APIManager.get("producttypes", props.match.params.productTypeId)
         .then(setType)
     }
 
+    // Gets all products and sets state
     const getProducts = () => {
         APIManager.getAll("products")
             .then(setProductsList)
     }
 
+    // Create useEffect()
     useEffect(() => {
         getSingleType()
         getProducts()
     }, [])
 
+    // Create HTML representation with JSX
     return (
         <>
             <h1>{singleType.name}</h1>
@@ -50,61 +58,3 @@ const ProductTypeDetails = props => {
 }
 
 export default ProductTypeDetails
-
-// import React, { useState, useEffect } from "react"
-// import { Link } from 'react-router-dom'
-// import APIManager from "../../modules/APIManager"
-
-// const ProductTypes = props => {
-
-//     // const { toggleDialog, modalIsOpen } = useModal("#dialog--itinerary")
-
-//     const [productTypesList, setProductTypesList] = useState([])
-//     const [productsList, setProductsList] = useState([])
-
-//     const getProductTypes= () => {
-//         APIManager.getAll("producttypes")
-//         .then(setProductTypesList)
-//     }
-
-//     const getProducts= () => {
-//         APIManager.getAll("products")
-//         .then(setProductsList)
-//     }
-
-//     useEffect(() => {
-//         getProductTypes()
-//         getProducts()
-//     }, [])
-
-//     return (
-//         <>
-//             <h2>Products</h2>
-//                 <h5 className="sell-link"><a href="/products/sell"> + Sell a Product</a></h5>
-//                 <div className="productTypes">
-//                 {
-//                     productTypesList.map((type) => {
-//                         const filtered = productsList.filter((product) => {
-//                             return type.id === product.product_type_id})
-
-//                         return (
-//                             <div key={type.id}>
-//                                 <strong>{type.name} ({filtered.length})</strong>
-//                                 {filtered.slice(0, 4).map((product) => {
-//                                     return (
-//                                         <Link key={product.id} className="nav-link" to={`/products/${product.id}`}>
-//                                             <li>{product.name}</li>
-//                                         </Link>
-//                                     )
-//                                     })
-//                                }
-//                             </div>
-//                         )
-//                     })
-//                 }
-//                 </div>
-//         </>
-//     )
-// }
-
-// export default ProductTypes

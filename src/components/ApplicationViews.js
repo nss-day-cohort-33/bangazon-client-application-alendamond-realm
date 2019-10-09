@@ -1,13 +1,19 @@
 import { Route } from "react-router-dom"
-import React,  { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
+import OrderList from "./home/Orders"
+import CustomerProfile from "./home/Profile"
+import AddPaymentTypes from "./paymenttypes/AddPaymentTypes"
 import HomePage from "./home/HomePage"
 import APIManager from "../modules/APIManager"
 import ProductTypes from "./home/ProductTypes"
+import ProductTypeDetails from "./home/ProductTypeDetails"
 import ProductDetail from "./Products/ProductDetail"
 import SellProductForm from "./Products/SellProductForm"
+import { get } from "https"
+
 
 
 const ApplicationViews = () => {
@@ -20,14 +26,14 @@ const ApplicationViews = () => {
     const [productTypesList, setProductTypesList] = useState([])
     const [ordersProductsList, setOrdersProductsList] = useState([])
 
-    const getProducts= () => {
+    const getProducts = () => {
         APIManager.getAll("products")
-        .then(setProductsList)
+            .then(setProductsList)
     }
 
-    const getProductTypes= () => {
+    const getProductTypes = () => {
         APIManager.getAll("producttypes")
-        .then(setProductTypesList)
+            .then(setProductTypesList)
     }
 
     useEffect(() => {
@@ -45,6 +51,12 @@ const ApplicationViews = () => {
             />
 
             <Route
+                exact path="/addpayment" render={props => {
+                    return <AddPaymentTypes {...props} />
+                }}
+            />
+
+            <Route
                 path="/register" render={props => {
                     return <Register {...props} />
                 }}
@@ -57,10 +69,47 @@ const ApplicationViews = () => {
             />
 
             <Route
+                path="/orders" render={props => {
+                    return (
+                        <>
+                            <h1>Orders</h1>
+                            <OrderList {...props} />
+                        </>
+                    )
+                    }}
+            />
+
+            <Route
                 exact path="/products" render={props => {
-                    return <ProductTypes {...props} productTypesList={productTypesList} productsList={productsList} />
+                    return <ProductTypes {...props} productTypesList={productTypesList} productsList={productsList} getProductTypes={getProductTypes} getProducts={getProducts} />
                 }}
             />
+
+            <Route
+                exact path="/productlist/:productTypeId(\d+)" render={props => {
+                    return <ProductTypeDetails {...props} productTypesList={productTypesList} productsList={productsList} getProductTypes={getProductTypes} getProducts={getProducts} />
+                }}
+            />
+
+
+            <Route
+                path="/myaccount" render={props => {
+                    return (
+                        <>
+                            <h1>My Account</h1>
+                            <CustomerProfile {...props} />
+                        </>
+                    )
+                }}
+            />
+
+
+           {/* <Route
+                path="/ordersproducts" render={props => {
+                    return <OrderProducts {...props}  ordersProductsList={ordersProductsList} />
+                }}
+            /> */}
+
 
             <Route exact path="/products/:productId(\d+)" render={(props) => {
                 return <ProductDetail  {...props} />
@@ -68,7 +117,7 @@ const ApplicationViews = () => {
             />
 
             <Route exact path="/products/sell" render={(props) => {
-                return <SellProductForm  {...props} />
+                return <SellProductForm  {...props} productTypesList={productTypesList} getProductTypes={getProductTypes} />
             }}
             />
 

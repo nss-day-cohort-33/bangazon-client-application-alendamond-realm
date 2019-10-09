@@ -13,8 +13,6 @@ const quantity = useRef()
 const type = useRef()
 
 
-
-
   return (
   <React.Fragment>
     <form>

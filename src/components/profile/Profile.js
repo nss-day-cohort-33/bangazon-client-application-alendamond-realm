@@ -2,6 +2,10 @@ import APIManager from "../../modules/APIManager";
 import React, { useEffect, useState } from "react";
 import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
 
+// Author: Curt Cato
+// Purpose: To show the User its related information. Provide a link to view and add payment types
+// Methods: A getAll to get the customers from DB
+
 const CustomerProfile = props => {
   const [customerProfile, setProfile] = useState([]);
   const { isAuthenticated } = useSimpleAuth();
@@ -10,7 +14,7 @@ const CustomerProfile = props => {
     if (isAuthenticated()) {
       APIManager.getAll("customers").then(customer => {
         setProfile(customer);
-        console.log("customer", customer);
+        // console.log("customer", customer);
       });
     }
   };
@@ -23,7 +27,8 @@ const CustomerProfile = props => {
     <>
       <main className="explorer">
         {customerProfile.map(profile => {
-          if (profile.user_id == localStorage.getItem("customer_id")) {
+          console.log("profile", profile)
+          if (profile.user_id == localStorage.getItem("user_id")) {
             return (
               <div>
                 <ul>

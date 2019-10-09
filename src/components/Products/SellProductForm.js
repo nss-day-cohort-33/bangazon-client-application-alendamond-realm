@@ -12,52 +12,57 @@ const description = useRef()
 const quantity = useRef()
 const type = useRef()
 
-
+useEffect(() => {
+  props.getProductTypes()
+  console.log(props)
+}, [])
 
 
   return (
-  <React.Fragment>
+    <React.Fragment>
     <form>
       <div>
         <label htmlFor="name">Name</label>
         <input
-        type="text"
-        name="name"
-        ref={name}
-        required />
-        </div>
-        <div>
+          type="text"
+          name="name"
+          ref={name}
+          required />
+      </div>
+      <div>
         <label htmlFor="price">Price</label>
         <input
-        type="text"
-        name="price"
-        ref={price}
-        required />
-        </div>
-        <div>
+          type="text"
+          name="price"
+          ref={price}
+          required />
+      </div>
+      <div>
         <label htmlFor="description">Description</label>
         <input
-        type="text"
-        name="description"
-        ref={description}
-        required />
-        </div>
-        <div>
+          type="text"
+          name="description"
+          ref={description}
+          required />
+      </div>
+      <div>
         <label htmlFor="quantity">Quantity</label>
         <input
-        type="number"
-        name="quantity"
-        ref={quantity}
-        required />
-        </div>
-        <div>
-        <label htmlFor="type">Type</label>
-        <select
-        type="text"
-        name="type"
-        ref={type}
-        required />
-        </div>
+          type="number"
+          name="quantity"
+          ref={quantity}
+          required />
+      </div>
+      <div>
+        <label htmlFor="type">Product Type</label>
+        <select type="text" name="type" ref={type}>
+          {/* {props.productTypeList.map((type) => {
+            return <option>
+              {type.name}
+            </option>
+          })} */}
+        </select>
+      </div>
       <button type="submit">Add to product List</button>
     </form>
   </React.Fragment>

@@ -13,20 +13,9 @@ const getCustomer = () => {
             setProfile(customer);
             console.log("customer", customer)
         })
-        .then((response) => response.json())
       }
   };
 
-
-//   const getOrders = () => {
-//     if (isAuthenticated()) {
-//         APIManager.getAll("orders")
-//         .then(allOrders => {
-//             setOrders(allOrders);
-//             console.log("orders", allOrders)
-//           });
-//       }
-//   };
 
   useEffect(() =>
                    {getCustomer()
@@ -36,13 +25,14 @@ const getCustomer = () => {
     <>
       <main className="explorer">
         {customerProfile.map(profile => {
+            if (profile.user_id == localStorage.getItem("customer_id")) {
           return (
             <div>
               <ul>
                 <li>{profile.address}</li>
               </ul>
             </div>
-          );
+            )}
         })}
       </main>
     </>

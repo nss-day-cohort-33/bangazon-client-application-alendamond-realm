@@ -112,11 +112,7 @@ const ApplicationViews = () => {
                     return <PaymentTypes {...props}  paymentTypesList={paymentTypesList} />
                 }}
             />
-            <Route
-                path="/customers" render={props => {
-                    return <Customers {...props}  customersList={customersList} />
-                }}
-            /> */}
+         */}
 
             <Route
                 path="/myaccount" render={props => {

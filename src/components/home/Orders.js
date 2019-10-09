@@ -38,6 +38,7 @@ const OrderList = props => {
     <>
       <main className="explorer">
         {customerOrders.map(order => {
+            // console.log(order)
           return (
             <div>
               <ul>

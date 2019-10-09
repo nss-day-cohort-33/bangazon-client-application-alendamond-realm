@@ -18,53 +18,8 @@ const quantity = useRef()
 const product_type = useRef()
 const city = useRef()
 
-  // const [productTypeList, setProductTypesList] = useState([])
-
-  // const [name, setName] = useState("")
-  // const [price, setPrice] = useState("")
-  // const [description, setDescription] = useState("")
-  // const [quantity, setQuantity] = useState("")
   const [productType, setProductType] = useState([])
 
-
-//   const handleOnChangeName = event => {
-//     setName(event.target.value)
-// }
-
-// const handleOnChangePrice = event => {
-//   setPrice(event.target.value)
-// }
-
-// const handleOnChangeDescription = event => {
-//   setDescription(event.target.value)
-// }
-
-// const handleOnChangeQuantity = event => {
-//   setQuantity(event.target.value)
-// }
-
-// const handleOnChangeProductType = event => {
-//   setProductType(event.target.value)
-// }
-
-// const handleOnClickAddProduct = () => {
-//     if (name === "" || price === "" || description === "" || quantity === "" || productType === "") {
-//         window.alert("Please fill in all fields")
-//     } else {
-//         const newProductInfo = {
-//             name: name,
-//             price: price,
-//             description: description,
-//             quantity: quantity,
-//             productType: productType
-//         }
-
-//         APIManager.post("products", newProductInfo)
-//                 .then((allTheItems) => {
-//                     setProductType(allTheItems)
-//                 })
-//         }
-//     }
 
 
 const addToProducts = (e) => {
@@ -83,9 +38,7 @@ const addToProducts = (e) => {
 
 }
   APIManager.post("products", newProductInfo)
-      // .then(response => response.json())
       .then(() => {
-          console.log("Added")
           props.history.push("/products")
       })
 }
@@ -99,13 +52,8 @@ const addToProducts = (e) => {
 
   useEffect(() => {
     getProductTypes()
-    // console.log(productType)
 }, [])
 
-useEffect(() => {
-  props.getProductTypes()
-  console.log(props)
-}, [])
 
 const getCategories = ()=> {
   APIManager.getAll("producttypes")
@@ -127,9 +75,7 @@ useEffect(() => {
         type="text"
         name="name"
         ref={name}
-        // value = {name}
         placeholder = "Name"
-        // onChange={handleOnChangeName}
          />
         </div>
         <div>
@@ -138,9 +84,7 @@ useEffect(() => {
         type="text"
         name="price"
         ref={price}
-        // value = {price}
         placeholder = "Price"
-        // onChange={handleOnChangePrice}
          />
         </div>
         <div>
@@ -149,9 +93,7 @@ useEffect(() => {
         type="text"
         name="description"
         ref={description}
-        // value = {description}
         placeholder = "description"
-        // onChange={handleOnChangeDescription}
          />
         </div>
         <div>
@@ -160,9 +102,7 @@ useEffect(() => {
         type="number"
         name="quantity"
         ref={quantity}
-        // value = {quantity}
         placeholder = "quantity"
-        // onChange={handleOnChangeQuantity}
          />
          </div>
         <div>
@@ -171,9 +111,7 @@ useEffect(() => {
         type="text"
         name="city"
         ref={city}
-        // value = {quantity}
         placeholder = "city"
-        // onChange={handleOnChangeQuantity}
          />
         </div>
         <div>
@@ -182,7 +120,6 @@ useEffect(() => {
         type="product_type"
         name="product_type"
         ref={product_type}
-        // onChange={handleOnChangeProductType}
        >
         <option>Select Category</option>
         {

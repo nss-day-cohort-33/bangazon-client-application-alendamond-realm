@@ -1,8 +1,13 @@
 import React, {useRef, useEffect, useState} from 'react';
+import APIManager from '../../modules/APIManager';
 
 
 
 const SellProductForm = props => {
+
+
+  const [addProduct, setProduct] = useState([]);
+  const [categoryList, setCategoryList] = useState([]);
 
 
 
@@ -10,10 +15,32 @@ const name = useRef()
 const price = useRef()
 const description = useRef()
 const quantity = useRef()
-const type = useRef()
+const producttype_id = useRef()
 
 
+const createProduct = newProduct => {
+  return fetch("http://localhost:8000/products", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Token ${localStorage.getItem("token")}`
+    },
+    body: JSON.stringify(newProduct)
+  }).then(res => res.json());
 
+};
+
+const getCategories = ()=> {
+  APIManager.getAll("producttypes")
+      .then((categoryList) => {
+        setCategoryList(categoryList)
+      })
+}
+
+useEffect(() => {
+  getCategories()
+}, []);
 
   return (
   <React.Fragment>
@@ -51,14 +78,14 @@ const type = useRef()
         required />
         </div>
         <div>
-        <label htmlFor="type">Type</label>
+        <label htmlFor="producttype_id">Type</label>
         <select
-        type="text"
-        name="type"
-        ref={type}
+        type="producttype_id"
+        name="producttype_id"
+        ref={producttype_id}
         required />
         </div>
-      <button type="submit">Add to product List</button>
+      <button >Add to product List</button>
     </form>
   </React.Fragment>
   )

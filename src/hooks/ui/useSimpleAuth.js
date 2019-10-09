@@ -46,6 +46,7 @@ const useSimpleAuth = () => {
     const logout = () => {
         setIsLoggedIn(false)
         localStorage.removeItem("token")
+        window.location = "/login"
     }
 
     return { isAuthenticated, logout, login, register }

@@ -1,15 +1,11 @@
 import React, {useRef, useEffect, useState} from 'react';
 import APIManager from "../../modules/APIManager"
 
-
+// Author - Mary West
+// Purpose - Seller is able to add Product to Product Page
+// Methods - GET, POST
 
 const SellProductForm = props => {
-
-
-  const [addProduct, setProduct] = useState([]);
-  const [categoryList, setCategoryList] = useState([]);
-
-
 
 const name = useRef()
 const price = useRef()
@@ -18,13 +14,14 @@ const quantity = useRef()
 const product_type = useRef()
 const city = useRef()
 
-  const [productType, setProductType] = useState([])
+const [productType, setProductType] = useState([])
 
 
-
+// function that adds a product to the products list on the products page
+// this function is being called when you click the add to product button
 const addToProducts = (e) => {
-  console.log('Hi')
   e.preventDefault()
+  // object that grabs all the values for new product
   const newProductInfo = {
     name: name.current.value,
     price: price.current.value,
@@ -37,12 +34,14 @@ const addToProducts = (e) => {
     image: null
 
 }
+// post request from API manager that connects create method on server side to post on client side
   APIManager.post("products", newProductInfo)
       .then(() => {
           props.history.push("/products")
       })
 }
 
+// function gets all product types - we need to get all product types because we need to view all of them in our dropdown
     const getProductTypes = () => {
       APIManager.getAll("producttypes")
           .then(setProductType)
@@ -54,18 +53,9 @@ const addToProducts = (e) => {
     getProductTypes()
 }, [])
 
-
-const getCategories = ()=> {
-  APIManager.getAll("producttypes")
-      .then((categoryList) => {
-        setCategoryList(categoryList)
-      })
-}
-
-useEffect(() => {
-  getCategories()
-}, []);
-
+// product form that shows in the browser that the user is able to fill out
+// in the producttype drop down we have to map through productType and we will get the value of the producttype id
+//when we select the producttype we want
   return (
     <React.Fragment>
     <form>

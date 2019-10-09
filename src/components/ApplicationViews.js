@@ -3,15 +3,9 @@ import React, { useState, useEffect } from "react"
 import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
-<<<<<<< HEAD
-import AddPaymentTypes from "./paymenttypes/AddPaymentTypes"
-// import ParkExplorer from "./home/ParkExplorer"
-// import MyItinerary from "./home/MyItinerary"
-=======
 import OrderList from "./home/Orders"
 import CustomerProfile from "./home/Profile"
 import AddPaymentTypes from "./paymenttypes/AddPaymentTypes"
->>>>>>> master
 import HomePage from "./home/HomePage"
 import APIManager from "../modules/APIManager"
 import ProductTypes from "./home/ProductTypes"

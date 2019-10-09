@@ -1,14 +1,16 @@
 import { Route } from "react-router-dom"
-import React,  { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
 import OrderList from "./home/Orders"
 import CustomerProfile from "./home/Profile"
+import AddPaymentTypes from "./paymenttypes/AddPaymentTypes"
 import HomePage from "./home/HomePage"
 import APIManager from "../modules/APIManager"
 import ProductTypes from "./home/ProductTypes"
 import ProductDetail from "./Products/ProductDetail"
+import SellProductForm from "./Products/SellProductForm"
 
 
 
@@ -22,47 +24,19 @@ const ApplicationViews = () => {
     const [productTypesList, setProductTypesList] = useState([])
     const [ordersProductsList, setOrdersProductsList] = useState([])
 
-    const getProducts= () => {
+    const getProducts = () => {
         APIManager.getAll("products")
-        .then(setProductsList)
+            .then(setProductsList)
     }
 
-    // const getOrders= () => {
-    //     APIManager.getAll("orders")
-    //     .then(response => response.json())
-    //     .then(setOrdersList)
-    // }
-
-    // const getCustomers= () => {
-    //     APIManager.getAll("customers")
-    //     .then(response => response.json())
-    //     .then(setCustomersList)
-    // }
-
-    const getProductTypes= () => {
+    const getProductTypes = () => {
         APIManager.getAll("producttypes")
-        .then(setProductTypesList)
+            .then(setProductTypesList)
     }
-
-    const getPaymentTypes= () => {
-        APIManager.getAll("paymenttypes")
-        .then(response => response.json())
-        .then(setPaymentTypesList)
-    }
-
-    // const getOrderProducts= () => {
-    //     APIManager.getAll("ordersproducts")
-    //     .then(response => response.json())
-    //     .then(setOrdersProductsList)
-    // }
 
     useEffect(() => {
         getProducts()
-        // getOrders()
-        // getCustomers()
         getProductTypes()
-        getPaymentTypes()
-        // getOrderProducts()
     }, [])
 
     return (
@@ -71,6 +45,12 @@ const ApplicationViews = () => {
             <Route
                 exact path="/" render={props => {
                     return <HomePage {...props} />
+                }}
+            />
+
+            <Route
+                exact path="/addpayment" render={props => {
+                    return <AddPaymentTypes {...props} />
                 }}
             />
 
@@ -108,12 +88,6 @@ const ApplicationViews = () => {
                 }}
             />
 
-            <Route
-                path="/paymenttypes" render={props => {
-                    return <PaymentTypes {...props}  paymentTypesList={paymentTypesList} />
-                }}
-            />
-
 
             <Route
                 path="/myaccount" render={props => {
@@ -133,8 +107,14 @@ const ApplicationViews = () => {
                 }}
             /> */}
 
+
             <Route exact path="/products/:productId(\d+)" render={(props) => {
                 return <ProductDetail  {...props} />
+            }}
+            />
+
+            <Route exact path="/products/sell" render={(props) => {
+                return <SellProductForm  {...props} />
             }}
             />
 

@@ -9,29 +9,29 @@ const AddPaymentTypes = props => {
     const [acctNumber, setAcctNumber] = useState("")
     const [expirationDate, setExpirationDate] = useState("")
 
-    handleOnChangeMerchantName = event => {
+    const handleOnChangeMerchantName = event => {
         setMerchantName(event.target.value)
     }
 
-    handleOnChangeAcctNumber = event => {
+    const handleOnChangeAcctNumber = event => {
         setAcctNumber(event.target.value)
     }
 
-    handleOnChangeExpirationDate = event => {
+    const handleOnChangeExpirationDate = event => {
         setExpirationDate(event.target.value)
     }
 
-    handleOnClickAddPaymentTypeButton = () => {
+    const handleOnClickAddPaymentTypeButton = () => {
         if (merchantName === "" || acctNumber === "" || expirationDate === "") {
             window.alert("Please fill in all fields")
         } else {
             const newPaymentInfo = {
-                merchantName: merchantName,
-                acctNumber: acctNumber,
-                expirationDate: expirationDate
+                merchant_name: merchantName,
+                acct_number: acctNumber,
+                expiration_date: expirationDate
             }
 
-            APIManager.post(newPaymentInfo).then(() => {
+            APIManager.post("paymenttypes", newPaymentInfo).then(() => {
                 APIManager.getAll("paymenttypes")
                     .then((allTheItems) => {
                         console.log("from payment types", allTheItems)
@@ -53,32 +53,52 @@ const AddPaymentTypes = props => {
 
     return (
         <>
-            <h2>Add a Payment Type</h2>
+            <h3>Existing Payment Types</h3>
             <div className="paymentTypeItems">
                 {
                     paymenttypeList.map((item) => {
-                        return <div>
-                            <p key={item.id}>{item.merchant_name}</p>
+                        return <div key={item.id}>
+                            <p>{item.merchant_name}</p>
                         </div>
                     })
                 }
             </div>
-            {/* <div className="form-container w-25">
+            <h3>Add a Payment Type</h3>
+            <div className="form-container w-25">
                 <div className="form-group">
-                    <label htmlFor="addaquote">Want to add a quote?</label>
-                    <textarea
-                        value={this.state.quote}
+                    <label htmlFor="add-merchant">Merchant Name</label>
+                    <input
+                        value={merchantName}
                         className="form-control"
-                        id="addaquote"
-                        rows="3"
-                        placeholder="(Enter quote here...select if you want it in favorites...and then press the Add Quote button)"
-                        onChange={this.handleOnChangeQuote}
+                        id="add-merchant"
+                        placeholder="Enter a Merchant"
+                        onChange={handleOnChangeMerchantName}
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="add-acctnumber">Account Number</label>
+                    <input
+                        value={acctNumber}
+                        className="form-control"
+                        id="add-acctnumber"
+                        placeholder="Enter an Account Number"
+                        onChange={handleOnChangeAcctNumber}
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="add-expirationdate">Expiration Date</label>
+                    <input
+                        value={expirationDate}
+                        className="form-control"
+                        id="add-expirationDate"
+                        placeholder="Enter an Expiration Date"
+                        onChange={handleOnChangeExpirationDate}
                     />
                 </div>
             </div>
             <div className="btn btn-primary mb-2">
-                <button onClick={() => { addItem(item) }}>Add Payment Type</button>
-            </div> */}
+                <button onClick={handleOnClickAddPaymentTypeButton}>Add Payment Type</button>
+            </div>
         </>
     )
 }

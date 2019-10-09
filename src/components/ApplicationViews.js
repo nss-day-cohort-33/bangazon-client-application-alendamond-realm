@@ -75,7 +75,7 @@ const ApplicationViews = () => {
             />
 
             <Route
-                exact path="/" render={props => {
+                exact path="/addpayment" render={props => {
                     return <AddPaymentTypes {...props} />
                 }}
             />

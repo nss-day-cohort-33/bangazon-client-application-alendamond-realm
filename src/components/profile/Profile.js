@@ -2,6 +2,10 @@ import APIManager from "../../modules/APIManager";
 import React, { useEffect, useState } from "react";
 import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
 
+// Author: Curt Cato
+// Purpose: To show the User its related information. Provide a link to view and add payment types
+// Methods: A getAll to get the customers from DB
+
 const CustomerProfile = props => {
   const [customerProfile, setProfile] = useState([]);
   const { isAuthenticated } = useSimpleAuth();

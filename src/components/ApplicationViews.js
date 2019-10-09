@@ -1,8 +1,11 @@
 import { Route } from "react-router-dom"
-import React,  { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
+import AddPaymentTypes from "./paymenttypes/AddPaymentTypes"
+// import ParkExplorer from "./home/ParkExplorer"
+// import MyItinerary from "./home/MyItinerary"
 import HomePage from "./home/HomePage"
 import APIManager from "../modules/APIManager"
 import ProductTypes from "./home/ProductTypes"
@@ -20,14 +23,14 @@ const ApplicationViews = () => {
     const [productTypesList, setProductTypesList] = useState([])
     const [ordersProductsList, setOrdersProductsList] = useState([])
 
-    const getProducts= () => {
+    const getProducts = () => {
         APIManager.getAll("products")
-        .then(setProductsList)
+            .then(setProductsList)
     }
 
-    const getProductTypes= () => {
+    const getProductTypes = () => {
         APIManager.getAll("producttypes")
-        .then(setProductTypesList)
+            .then(setProductTypesList)
     }
 
     useEffect(() => {
@@ -41,6 +44,12 @@ const ApplicationViews = () => {
             <Route
                 exact path="/" render={props => {
                     return <HomePage {...props} />
+                }}
+            />
+
+            <Route
+                exact path="/addpayment" render={props => {
+                    return <AddPaymentTypes {...props} />
                 }}
             />
 

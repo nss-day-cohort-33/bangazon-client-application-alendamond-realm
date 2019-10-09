@@ -3,31 +3,33 @@ import { Link } from 'react-router-dom'
 import APIManager from "../../modules/APIManager"
 
 //Author: Amber Gooch
-//Purpose: Allow a user to communicate with the Bangazon database to GET PUT POST and DELETE entries.
-//Methods: GET PUT(id) POST
+//Purpose: Allow a user to view all product categories with a list of 3 products of that type
+//Methods: GET POST
 
 const ProductTypes = props => {
-
-    // const { toggleDialog, modalIsOpen } = useModal("#dialog--itinerary")
 
     const [productTypesList, setProductTypesList] = useState([])
     const [productsList, setProductsList] = useState([])
 
+    // Gets all product types and sets state
     const getProductTypes= () => {
         APIManager.getAll("producttypes")
         .then(setProductTypesList)
     }
 
+    // Gets all products and sets state
     const getProducts= () => {
         APIManager.getAll("products")
         .then(setProductsList)
     }
 
+    // Create useEffect()
     useEffect(() => {
         getProductTypes()
         getProducts()
     }, [])
 
+    // Create HTML representation with JSX
     return (
         <>
             <h1>Products</h1>

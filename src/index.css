@@ -40,12 +40,15 @@ li {
 
  .product-cards {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+
 }
 
  .card {
   width: 220px;
   padding: 4px;
+  margin-left: 40px;
+  margin-right: 40px;
 }
 
 .card-title {

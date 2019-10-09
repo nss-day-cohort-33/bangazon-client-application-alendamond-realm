@@ -14,7 +14,7 @@ const CustomerProfile = props => {
     if (isAuthenticated()) {
       APIManager.getAll("customers").then(customer => {
         setProfile(customer);
-        console.log("customer", customer);
+        // console.log("customer", customer);
       });
     }
   };
@@ -27,7 +27,8 @@ const CustomerProfile = props => {
     <>
       <main className="explorer">
         {customerProfile.map(profile => {
-          if (profile.user_id == localStorage.getItem("customer_id")) {
+          console.log("profile", profile)
+          if (profile.user_id == localStorage.getItem("user_id")) {
             return (
               <div>
                 <ul>

@@ -34,7 +34,10 @@ const CustomerProfile = props => {
                   <li>{profile.address}</li>
                 </ul>
                 <a href="/addpayment">
-                  <h4>View Existing and Add New Payment Types</h4>
+                  <h4>Add New Payment Types</h4>
+                </a>
+                <a href="/deletepayment">
+                  <h4>Payment Options</h4>
                 </a>
               </div>
             );

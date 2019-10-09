@@ -124,7 +124,7 @@ const ApplicationViews = () => {
             />
 
             <Route exact path="/products/sell" render={(props) => {
-                return <SellProductForm  {...props} productTypesList={productTypesList} getProductTypes={getProductTypes} />
+                return <SellProductForm  {...props}  />
             }}
             />
 

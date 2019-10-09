@@ -63,17 +63,5 @@ export default Object.create(null, {
         }
       })
     }
-  },
-  get20items: {
-    value: function (name) {
-      return fetch(`${remoteURL}/${name}?quantity=20`, {
-        "method": "GET",
-        "headers": {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-          "Authorization": `Token ${localStorage.getItem("token")}`
-        },
-      }).then(e => e.json())
-    }
   }
 })

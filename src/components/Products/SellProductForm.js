@@ -6,6 +6,10 @@ import APIManager from "../../modules/APIManager"
 const SellProductForm = props => {
 
 
+  const [addProduct, setProduct] = useState([]);
+  const [categoryList, setCategoryList] = useState([]);
+
+
 
 const name = useRef()
 const price = useRef()
@@ -98,10 +102,24 @@ const addToProducts = (e) => {
     // console.log(productType)
 }, [])
 
+useEffect(() => {
+  props.getProductTypes()
+  console.log(props)
+}, [])
 
+const getCategories = ()=> {
+  APIManager.getAll("producttypes")
+      .then((categoryList) => {
+        setCategoryList(categoryList)
+      })
+}
+
+useEffect(() => {
+  getCategories()
+}, []);
 
   return (
-  <React.Fragment>
+    <React.Fragment>
     <form>
       <div>
         <label htmlFor="name">Name</label>

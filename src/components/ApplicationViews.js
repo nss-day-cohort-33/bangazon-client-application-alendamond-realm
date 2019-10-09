@@ -3,14 +3,15 @@ import React, { useState, useEffect } from "react"
 import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
+import OrderList from "./home/Orders"
+import CustomerProfile from "./home/Profile"
 import AddPaymentTypes from "./paymenttypes/AddPaymentTypes"
-// import ParkExplorer from "./home/ParkExplorer"
-// import MyItinerary from "./home/MyItinerary"
 import HomePage from "./home/HomePage"
 import APIManager from "../modules/APIManager"
 import ProductTypes from "./home/ProductTypes"
 import ProductDetail from "./Products/ProductDetail"
 import SellProductForm from "./Products/SellProductForm"
+
 
 
 const ApplicationViews = () => {
@@ -66,10 +67,46 @@ const ApplicationViews = () => {
             />
 
             <Route
+                path="/orders" render={props => {
+                    return (
+                        <>
+                            <h1>Orders</h1>
+                            <OrderList {...props} />
+                        </>
+                    )
+                    }}
+            />
+
+            <Route
                 exact path="/products" render={props => {
-                    return <ProductTypes {...props} productTypesList={productTypesList} productsList={productsList} />
+                    return (
+                        <>
+                            {/* <h1>Product Types</h1> */}
+                            <ProductTypes {...props} productTypesList={productTypesList} productsList={productsList} />
+                        </>
+                    )
                 }}
             />
+
+
+            <Route
+                path="/myaccount" render={props => {
+                    return (
+                        <>
+                            <h1>My Account</h1>
+                            <CustomerProfile {...props} />
+                        </>
+                    )
+                }}
+            />
+
+
+           {/* <Route
+                path="/ordersproducts" render={props => {
+                    return <OrderProducts {...props}  ordersProductsList={ordersProductsList} />
+                }}
+            /> */}
+
 
             <Route exact path="/products/:productId(\d+)" render={(props) => {
                 return <ProductDetail  {...props} />

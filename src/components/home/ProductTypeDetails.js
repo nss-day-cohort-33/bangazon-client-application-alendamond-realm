@@ -4,16 +4,22 @@ import APIManager from "../../modules/APIManager";
 
 const ProductTypeDetails = props => {
 
-    const [singleType, setType] = useState([]);
+    const [singleType, setType] = useState([])
+    const [productsList, setProductsList] = useState([])
 
     const getSingleType = () => {
         APIManager.get("producttypes", props.match.params.productTypeId)
         .then(setType)
     }
 
+    const getProducts = () => {
+        APIManager.getAll("products")
+            .then(setProductsList)
+    }
+
     useEffect(() => {
         getSingleType()
-        console.log(props)
+        getProducts()
     }, [])
 
     return (
@@ -21,7 +27,7 @@ const ProductTypeDetails = props => {
             <h1>{singleType.name}</h1>
             <br />
             <div className="product-cards">
-                {props.productsList.filter((product) => {
+                {productsList.filter((product) => {
                     return singleType.id === product.product_type_id}).map((product) => {
                         return (
                             <div key={product.id} className="card">

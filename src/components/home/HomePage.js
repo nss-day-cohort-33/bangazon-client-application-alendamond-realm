@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import APIManager from "../../modules/APIManager"
 import { Link } from 'react-router-dom'
 
+// This creates
 const HomePage = props => {
     const [products, setProducts] = useState([])
 

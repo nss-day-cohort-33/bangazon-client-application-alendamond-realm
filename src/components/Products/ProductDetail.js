@@ -1,5 +1,6 @@
 import React, {useState, useEffect } from "react"
 import APIManager from "../../modules/APIManager";
+import OrderList from "../orders/Orders";
 
 // Author Mary West
 // Purpose - When user clicks on the detail button on the products list, they should see a detailed version
@@ -8,15 +9,45 @@ import APIManager from "../../modules/APIManager";
 const ProductDetail = props => {
 
     const [singleProduct, setProduct] = useState([]);
+    const [confirmation, setConfirmation] = useState("")
 
     const getSingleProduct = () => {
-        APIManager.get("products",props.match.params.productId)
-        .then(setProduct)
-    }
+        fetch(`http://localhost:8000/products/${props.match.params.productId}`, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        })
+          .then(response => response.json())
+          .then(response => {
+            setProduct(response);
+          });
+      };
+
 
     useEffect(() => {
         getSingleProduct()
     }, [])
+
+    // Only need to send the product id to Django app. The rest of the process will be handled on the server side
+    const addToOrder = () => {
+        fetch(`http://localhost:8000/orders`, {
+          "method": "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Token ${localStorage.getItem("token")}`
+          },
+          body: JSON.stringify({product_id: singleProduct.id})
+        })
+        .then(() => {
+            setConfirmation("Product added to cart")
+            setTimeout(() => {
+              setConfirmation("")
+            }, 2000);
+        })
+      }
 
     return (
         <>
@@ -27,7 +58,8 @@ const ProductDetail = props => {
                     <p>{singleProduct.description}</p>
                     <p>Quantity: {singleProduct.quantity}</p>
                     <br/>
-                    <button>Add Order</button>
+                    <button onClick = {addToOrder}>Add Order</button>
+                    <h4 className="orderConfirmation">{confirmation}</h4>
                 </section>
             }
         </>

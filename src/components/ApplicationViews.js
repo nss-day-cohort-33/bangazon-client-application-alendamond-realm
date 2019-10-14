@@ -1,6 +1,6 @@
 import { Route } from "react-router-dom"
 import React, { useState, useEffect } from "react"
-import { withRouter } from "react-router-dom"
+import { withRouter, Redirect } from "react-router-dom"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
 import OrderList from "./orders/Orders"
@@ -14,11 +14,12 @@ import ProductTypeDetails from "./home/ProductTypeDetails"
 import ProductDetail from "./Products/ProductDetail"
 import SellProductForm from "./Products/SellProductForm"
 import MyProducts from "./Products/MyProducts"
+import useSimpleAuth from "../hooks/ui/useSimpleAuth"
 
 
 
 const ApplicationViews = () => {
-
+    const { isAuthenticated } = useSimpleAuth()
 
     const [productsList, setProductsList] = useState([])
     const [ordersList, setOrdersList] = useState([])
@@ -53,7 +54,10 @@ const ApplicationViews = () => {
 
             <Route
                 exact path="/addpayment" render={props => {
-                    return <AddPaymentTypes {...props} />
+                    if(isAuthenticated()) return(
+                    <AddPaymentTypes {...props} />
+                    )
+                    else return <Redirect to="/login"/>
                 }}
             />
 
@@ -77,12 +81,12 @@ const ApplicationViews = () => {
 
             <Route
                 path="/orders" render={props => {
-                    return (
+                    if(isAuthenticated()) return (
                         <>
-                            <h1>Orders</h1>
                             <OrderList {...props} />
                         </>
                     )
+                    else return <Redirect to="/login"/>
                 }}
             />
 
@@ -106,12 +110,13 @@ const ApplicationViews = () => {
 
             <Route
                 path="/myaccount" render={props => {
-                    return (
+                    if(isAuthenticated())  return (
                         <>
                             <h1>My Account</h1>
                             <CustomerProfile {...props} />
                         </>
                     )
+                    else return <Redirect to="/login"/>
                 }}
             />
 
@@ -129,7 +134,10 @@ const ApplicationViews = () => {
             />
 
             <Route exact path="/products/sell" render={(props) => {
-                return <SellProductForm  {...props}  />
+                if(isAuthenticated()) return (
+                <SellProductForm  {...props}  />
+                )
+                else return <Redirect to="/login"/>
             }}
             />
 

@@ -13,6 +13,18 @@ export default Object.create(null, {
       }).then(e => e.json())
     }
   },
+  getMy: {
+    value: function (myproducts) {
+      return fetch(`${remoteURL}/${myproducts}?customer=${localStorage.getItem("user_id")}`, {
+        "method": "GET",
+        "headers": {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": `Token ${localStorage.getItem("token")}`
+        },
+      }).then(e => e.json())
+    }
+  },
   getAll: {
     value: function (name) {
       return fetch(`${remoteURL}/${name}`, {

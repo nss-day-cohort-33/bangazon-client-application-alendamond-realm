@@ -13,8 +13,8 @@ import ProductTypes from "./home/ProductTypes"
 import ProductTypeDetails from "./home/ProductTypeDetails"
 import ProductDetail from "./Products/ProductDetail"
 import SellProductForm from "./Products/SellProductForm"
+import MyProducts from "./Products/MyProducts"
 import useSimpleAuth from "../hooks/ui/useSimpleAuth"
-import { get } from "https"
 
 
 
@@ -90,6 +90,11 @@ const ApplicationViews = () => {
                 }}
             />
 
+            <Route
+                exact path="/myproducts" render={props => {
+                    return <MyProducts {...props}  />
+                }}
+            />
             <Route
                 exact path="/products" render={props => {
                     return <ProductTypes {...props} productTypesList={productTypesList} productsList={productsList} getProductTypes={getProductTypes} getProducts={getProducts} />

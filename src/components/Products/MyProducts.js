@@ -33,11 +33,40 @@ useEffect(() => {
   getMyProducts();
 }, []);
 
+const deleteMyProduct = () => {
+    if (isAuthenticated()) {
+        fetch(`http://localhost:8000/myproducts/${props.myproduct.id}`, {
+            "method": "DELETE",
+            "headers": {
+                "Authorization": `Token ${localStorage.getItem("bangazon_token")}`
+            }
+        })
+            .then(props.getPaymentTypes)
+
+    }
+}
+
 //     // Create HTML representation with JSX
 console.log(myProducts)
     return (
         <>
-            <h1>My Products</h1>
+
+        <h1>My Products</h1>
+        {myProducts.map(myproduct => {
+          console.log("myproduct", myproduct);
+          return (
+            <div className="card">
+              <ul>
+                <li>{myproduct.name}</li>
+                <li>{myproduct.price}</li>
+                <li>Description: {myproduct.description}</li>
+                <li>Quantity: {myproduct.quantity}</li>
+                <br/>
+                <button onClick={deleteMyProduct}>Delete</button>
+              </ul>
+            </div>
+          );
+        })}
 
 
 

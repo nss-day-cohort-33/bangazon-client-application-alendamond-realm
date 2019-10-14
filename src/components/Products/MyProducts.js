@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import APIManager from "../../modules/APIManager";
+import useSimpleAuth from "../../hooks/ui/useSimpleAuth"
 
 // //Author: Scott Silver
 // //Purpose: Allow a user to view full list of products they have for sale.
@@ -8,19 +9,18 @@ import APIManager from "../../modules/APIManager";
 
 const MyProducts = props => {
   const [myProducts, setMyProducts] = useState([]);
+  const { isAuthenticated } = useSimpleAuth()
 
-//   // Gets a single product type by its product type id and sets state
+  // this fetch call gets all the payment types that are specific to this user. It takes a query param of customer id, which we have saved in local storage. That's why it isn't being passed in as an argument
+
   const getMyProducts = () => {
-    APIManager.getMy("myproducts", props.match.params.myproducts).then(
-      setMyProducts
-    );
-  };
+      if (isAuthenticated()) {
+          APIManager.getMy("myproducts")
+              .then(setMyProducts)
+      }
+  }
 
-//   // Gets all products and sets state
-//   // const getProducts = () => {
-//   //     APIManager.getAll("products")
-//   //         .then(setProductsList)
-// };
+
 
 // // Create useEffect()
 useEffect(() => {

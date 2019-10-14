@@ -19,8 +19,9 @@ const useSimpleAuth = () => {
             .then(res => res.json())
             .then(res => {
                 if ("token" in res) {
+                    console.log(res)
                     localStorage.setItem( "token", res.token )
-                    localStorage.setItem("customer_id", res.customer_id)
+                    localStorage.setItem("user_id", res.user_id)
                     setIsLoggedIn(true)
                 }
             })

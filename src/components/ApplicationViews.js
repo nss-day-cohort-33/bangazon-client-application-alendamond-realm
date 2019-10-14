@@ -83,7 +83,6 @@ const ApplicationViews = () => {
                 path="/orders" render={props => {
                     if(isAuthenticated()) return (
                         <>
-                            <h1>Orders</h1>
                             <OrderList {...props} />
                         </>
                     )

@@ -6,21 +6,30 @@ import { Link } from 'react-router-dom'
 const HomePage = props => {
     const [products, setProducts] = useState([])
 
-    const get20Products = ()=> {
-        APIManager.getAll('products')
-            .then((productItem) => {
-                setProducts(productItem)
-            })
-    }
+    const getQuantity = () => {
+        fetch(`http://localhost:8000/products?quantity=20`, {
+            "method": "GET",
+            "headers": {
+              "Accept": "application/json",
+              "Content-Type": "application/json",
+            }
+        })
+        .then(response => response.json())
+        .then((response) => {
+            setProducts(response.reverse())
+          })
 
- useEffect(get20Products, [])
+}
+
+ useEffect(getQuantity, [])
 
  return (
      <>
      <h1> Welcome to Bangazon</h1>
      <h4> Here are some of our new items</h4>
      {
-     products.slice(-20).map(item =>{
+     products.map(item =>{
+         console.log(item)
             return(<div key={item.id} className={`productId-${item.id}`}>
                 <Link className="nav-link" to={`/products/${item.id}`}>
                 <p>{item.name}</p>

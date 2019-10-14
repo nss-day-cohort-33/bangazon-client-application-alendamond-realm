@@ -42,11 +42,19 @@ const addToProducts = (e) => {
 }
 
 // function gets all product types - we need to get all product types because we need to view all of them in our dropdown
-    const getProductTypes = () => {
-      APIManager.getAll("producttypes")
-          .then(setProductType)
-  }
-
+  const getProductTypes= () => {
+    fetch(`http://localhost:8000/producttypes`, {
+        "method": "GET",
+        "headers": {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        }
+    })
+    .then(response => response.json())
+    .then((response) => {
+        setProductType(response)
+      })
+    }
 
 
   useEffect(() => {

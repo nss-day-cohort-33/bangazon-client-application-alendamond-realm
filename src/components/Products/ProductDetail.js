@@ -12,9 +12,18 @@ const ProductDetail = props => {
     const [confirmation, setConfirmation] = useState("")
 
     const getSingleProduct = () => {
-        APIManager.get("products",props.match.params.productId)
-        .then(setProduct)
-    }
+        fetch(`http://localhost:8000/products/${props.match.params.productId}`, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        })
+          .then(response => response.json())
+          .then(response => {
+            setProduct(response);
+          });
+      };
 
 
     useEffect(() => {

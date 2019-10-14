@@ -15,43 +15,32 @@ const MyProducts = props => {
 
   const getMyProducts = () => {
       if (isAuthenticated()) {
-          APIManager.getMy("myproducts")
-              .then(setMyProducts)
+        fetch(`http://localhost:8000/products?customer=${localStorage.getItem("user_id")}`, {
+            "method": "GET",
+            "headers": {
+              "Accept": "application/json",
+              "Content-Type": "application/json",
+              "Authorization": `Token ${localStorage.getItem("token")}`
+            },
+          }).then(e => e.json())
+          .then(setMyProducts)
+        }
       }
-  }
-
 
 
 // // Create useEffect()
 useEffect(() => {
   getMyProducts();
-  console.log(myProducts)
 }, []);
 
 //     // Create HTML representation with JSX
+console.log(myProducts)
     return (
         <>
-            <h1>{myProducts}</h1>
-           <br />
-            {/* <div className="product-cards">
-                 {productsList.filter((product) => {
-                    return myProduct.id === user_id}).map((product) => {
-                        return (
-                             <div key={myProduct.id} className="card">
-                                 <Link key={product.id} className="card-title" to={`/products/${product.id}`}>
-                                     <h5><strong>{product.name}</strong></h5>
-                                 </Link>
-                                 <p className="card-body">
-                                     ${product.price}
-                                     <br />
-                                     Quantity: <em>{product.quantity}</em>
-                                 </p>
+            <h1>My Products</h1>
 
-                           </div>
-                        )
-                    })
-               }
-             </div> */}
+
+
         </>
     )
 

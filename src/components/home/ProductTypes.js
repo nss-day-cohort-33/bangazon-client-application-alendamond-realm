@@ -11,17 +11,32 @@ const ProductTypes = props => {
     const [productTypesList, setProductTypesList] = useState([])
     const [productsList, setProductsList] = useState([])
 
-    // Gets all product types and sets state
     const getProductTypes= () => {
-        APIManager.getAll("producttypes")
-        .then(setProductTypesList)
-    }
-
-    // Gets all products and sets state
-    const getProducts= () => {
-        APIManager.getAll("products")
-        .then(setProductsList)
-    }
+        fetch(`http://localhost:8000/producttypes`, {
+            "method": "GET",
+            "headers": {
+              "Accept": "application/json",
+              "Content-Type": "application/json",
+            }
+        })
+        .then(response => response.json())
+        .then((response) => {
+            setProductTypesList(response)
+          })
+        }
+        const getProducts = () => {
+            fetch(`http://localhost:8000/products`, {
+              method: "GET",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+              }
+            })
+              .then(response => response.json())
+              .then(response => {
+                setProductsList(response);
+              });
+          };
 
     // Create useEffect()
     useEffect(() => {

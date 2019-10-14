@@ -79,7 +79,6 @@ const ApplicationViews = () => {
                 path="/orders" render={props => {
                     return (
                         <>
-                            <h1>Orders</h1>
                             <OrderList {...props} />
                         </>
                     )

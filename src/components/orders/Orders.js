@@ -3,62 +3,53 @@ import React, { useEffect, useState } from "react";
 import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
 
 // Author: Curt Cato
-// Purpose: Provide the user with a view of selected orders
-// Methods: two getAlls to retrieve all orders and all orderproducts
+// Purpose: Provide the user with a view of open orders
 
 const OrderList = props => {
-  const [customerOrders, setOrders] = useState([]);
-  const [orderProducts, setOrderProducts] = useState([]);
-  const { isAuthenticated } = useSimpleAuth();
+  const [open_order, setOrder] = useState({line_items: []})
 
-  const getOrders = () => {
-    if (isAuthenticated()) {
-      APIManager.getAll("orders").then(allOrders => {
-        setOrders(allOrders);
-        console.log("orders", allOrders);
-      });
-    }
-  };
+  const getOpenOrder = () => {
+    fetch(`http://localhost:8000/orders?orderlist=true`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": `Token ${localStorage.getItem("token")}`
+      }
+    })
+    .then(response => {
+      console.log('response', response );
+      return response.json()
+    })
+    .then(setOrder)
+  }
 
-  const getOrderProducts = () => {
-    if (isAuthenticated()) {
-      APIManager.getAll("orderproduct").then(allOrderProducts => {
-        setOrderProducts(allOrderProducts);
-        console.log("orderProducts", allOrderProducts);
-      });
-    }
-  };
+  useEffect(getOpenOrder, [])
 
-  useEffect(() => {
-    getOrderProducts();
-    getOrders();
-  }, []);
+  const confirmOrder = () => {
+    props.history.push("/addpayment")
+  }
 
   return (
+    console.log("open orders", open_order),
     <>
-      <main className="explorer">
-        {customerOrders.map(order => {
-          console.log("order", order);
-          return (
-            <div>
-              <ul>
-                <li>{order.customer_id}</li>
-              </ul>
-            </div>
-          );
-        })}
-        {orderProducts.map(product => {
-          return (
-            <div>
-              <li>
-                <ol>{product.product_id}</ol>
-              </li>
-            </div>
-          );
-        })}
+     {open_order ?
+      <main className="order-items">
+        <h2>My Cart</h2>
+        <ul>
+          {
+            open_order.line_items.map(item => {
+                return (<li key={item.id}>{item.name}: ${item.price}</li>)
+              })
+          }
+        </ul>
+        <button onClick={confirmOrder}>Add Payment to complete order</button>
       </main>
+     :
+     ""
+        }
     </>
-  );
-};
+  )
+}
 
-export default OrderList;
+export default OrderList

@@ -47,6 +47,7 @@ const ProductTypeDetails = props => {
                                     <br />
                                     Quantity: <em>{product.quantity}</em>
                                 </p>
+
                             </div>
                         )
                     })

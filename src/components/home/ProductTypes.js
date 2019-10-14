@@ -50,10 +50,7 @@ const ProductTypes = props => {
                                     return (
                                         <Link key={product.id} className="nav-link" to={`/products/${product.id}`}>
                                             <li>{product.name}</li>
-                                            <button>Delete</button>
                                         </Link>
-
-
                                     )
                                     })
                                }

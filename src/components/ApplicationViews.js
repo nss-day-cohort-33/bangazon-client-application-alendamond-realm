@@ -13,7 +13,7 @@ import ProductTypes from "./home/ProductTypes"
 import ProductTypeDetails from "./home/ProductTypeDetails"
 import ProductDetail from "./Products/ProductDetail"
 import SellProductForm from "./Products/SellProductForm"
-import { get } from "https"
+import MyProducts from "./Products/MyProducts"
 
 
 
@@ -86,6 +86,11 @@ const ApplicationViews = () => {
                 }}
             />
 
+            <Route
+                exact path="/myproducts" render={props => {
+                    return <MyProducts {...props} MyProductsList={MyProductsList} getMyProducts={getMyProducts} />
+                }}
+            />
             <Route
                 exact path="/products" render={props => {
                     return <ProductTypes {...props} productTypesList={productTypesList} productsList={productsList} getProductTypes={getProductTypes} getProducts={getProducts} />

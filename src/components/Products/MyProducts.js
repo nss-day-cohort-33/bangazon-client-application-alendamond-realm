@@ -50,7 +50,7 @@ const MyProducts = props => {
   }, []);
 
   //     // Create HTML representation with JSX
-  console.log(myProducts);
+
   return (
     <>
       <h1>My Products</h1>

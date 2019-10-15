@@ -34,7 +34,7 @@ const AddPaymentTypes = props => {
             APIManager.post("paymenttypes", newPaymentInfo).then(() => {
                 APIManager.getAll("paymenttypes")
                     .then((allTheItems) => {
-                        console.log("from payment types", allTheItems)
+
                         setPaymentTypeList(allTheItems)
                     })
             })
@@ -44,7 +44,7 @@ const AddPaymentTypes = props => {
     const getAllPaymentTypes = () => {
         APIManager.getAll("paymenttypes")
             .then((allTheItems) => {
-                console.log("from payment types", allTheItems)
+
                 setPaymentTypeList(allTheItems)
             })
     }

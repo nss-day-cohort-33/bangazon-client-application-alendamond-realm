@@ -29,7 +29,6 @@ const HomePage = props => {
      <h4> Here are some of our new items</h4>
      {
      products.map(item =>{
-         console.log(item)
             return(<div key={item.id} className={`productId-${item.id}`}>
                 <Link className="nav-link" to={`/products/${item.id}`}>
                 <p>{item.name}</p>

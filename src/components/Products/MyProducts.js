@@ -59,7 +59,7 @@ const MyProducts = props => {
               <li>{myproduct.name}</li>
               <li>{myproduct.price}</li>
               <li>Description: {myproduct.description}</li>
-              <li>Quantity: {myproduct.quantity}</li>
+              <li>Quantity: {myproduct.quantity - myproduct.total_sold}</li>
               <li>Sold: {myproduct.total_sold}</li>
               <br />
               <button onClick={() => deleteMyProduct(myproduct.id)}>

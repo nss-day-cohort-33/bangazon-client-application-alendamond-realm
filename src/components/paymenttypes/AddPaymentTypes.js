@@ -47,7 +47,7 @@ const AddPaymentTypes = props => {
 
   return (
     <>
-      <div>
+      {/* <div>
         <h3>Existing Payment Types</h3>
         <select
           type="payment_type"
@@ -65,7 +65,7 @@ const AddPaymentTypes = props => {
           </select>
       </div>
       <button>Select</button>
-      <br />
+      <br /> */}
       {/* <div className="paymentTypeItems">
         {paymenttypeList.map(item => {
           return (
@@ -77,6 +77,7 @@ const AddPaymentTypes = props => {
       </div> */}
       <div>
         <h3>Add a New Payment Type</h3>
+        <br />
         <form
           className="payment-type-form"
           onSubmit={e => {
@@ -115,6 +116,7 @@ const AddPaymentTypes = props => {
             defaultValue={new Date().toISOString().slice(0, 10)}
             hidden
           ></input>
+          <br />
           <button type="submit">Add Payment</button>
         </form>
       </div>

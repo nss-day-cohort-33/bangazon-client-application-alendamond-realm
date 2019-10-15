@@ -1,6 +1,7 @@
 import APIManager from "../../modules/APIManager";
 import React, { useEffect, useState } from "react";
 import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
+import SelectPayment from "../paymenttypes/SelectPaymentTypes";
 
 // Author: Curt Cato
 // Purpose: Provide the user with a view of open orders
@@ -27,7 +28,7 @@ const OrderList = props => {
   useEffect(getOpenOrder, [])
 
   const confirmOrder = () => {
-    props.history.push("/addpayment")
+    props.history.push("/payment")
   }
 
   const cancelOrder = () => {
@@ -54,8 +55,10 @@ const OrderList = props => {
               })
           }
         </ul>
-        <button onClick={confirmOrder}>Add Payment to complete order</button>
-        <button onClick={cancelOrder}>Cancel order</button>
+        {/* <button onClick={confirmOrder}>Add Payment to complete order</button> */}
+        <SelectPayment />
+        <br />
+        <button className="btn-danger" onClick={cancelOrder}>Cancel order</button>
       </main>
      :
      ""

@@ -6,10 +6,18 @@ import APIManager from "../../modules/APIManager";
 
 const UpdateUser = props => {
 
+  const [customerEdit, setEditFields] = useState ([])
   const address = useRef();
   const phoneNumber = useRef();
   const lastName = useRef();
   // const { isAuthenticated } = useSimpleAuth();
+
+      // this function gets all customer information so it can be displayed in the input fields
+      const getCustomer = () => {
+        APIManager.getAll("customers").then(customer => {
+          setEditFields(customer);
+        });
+      }
 
   //function that updates the customer object in the DB
   //this is called on submit edit button
@@ -24,10 +32,15 @@ const UpdateUser = props => {
       last_name: lastName.current.value
     };
 
+
     //HTTP request from APIManager to update the customer object in DB
     APIManager.put("customers", updatedUser).then(() => {
       props.history.push("/myaccount")
     })};
+
+    useEffect(() => {
+      getCustomer();
+    }, []);
 
     //Edit form that user will use to fill out new information
     return (
@@ -37,6 +50,10 @@ const UpdateUser = props => {
             <h1 className="h3 mb-3 font-weight-normal">
               Edit Form
             </h1>
+        {customerEdit.map(profile => {
+          if (profile.user_id == localStorage.getItem("user_id")) {
+            return (
+              <div>
             <fieldset>
               <label htmlFor="inputAddress"> Address </label>
               <input
@@ -44,7 +61,7 @@ const UpdateUser = props => {
                 type="text"
                 name="address"
                 className="form-control"
-                placeholder="address"
+                placeholder={profile.address}
                 required
               />
             </fieldset>
@@ -55,7 +72,7 @@ const UpdateUser = props => {
                 type="text"
                 name="phoneNumber"
                 className="form-control"
-                placeholder="Phone number"
+                placeholder={profile.phone_number}
                 required
               />
             </fieldset>
@@ -66,10 +83,14 @@ const UpdateUser = props => {
                 type="text"
                 name="lastName"
                 className="form-control"
-                placeholder="Last Name"
+                placeholder={profile.user.last_name}
                 required
               />
             </fieldset>
+            </div>
+              );
+            }
+          })}
             <fieldset>
               <button type="submit">Submit Update</button>
             </fieldset>

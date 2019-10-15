@@ -31,10 +31,9 @@ const CustomerProfile = props => {
             return (
               <div>
                 <ul>
-                  <li>{profile.user.first_name}</li>
-                  <li>{profile.user.last_name}</li>
+                  <li>{profile.user.first_name} {profile.user.last_name}</li>
                   <li>{profile.user.email}</li>
-                  <li>{profile.user.phone_number}</li>
+                  <li>{profile.phone_number}</li>
                   <li>{profile.address}</li>
                 </ul>
                 <a href="/addpayment">

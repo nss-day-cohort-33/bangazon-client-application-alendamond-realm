@@ -40,6 +40,17 @@ const OrderList = props => {
     .then(props.history.push("/"))
   }
 
+  const deleteProductFromCart = (id) => {
+    console.log(id)
+    fetch(`http://localhost:8000/orderproducts/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Token ${localStorage.getItem("token")}`
+      }
+    })
+    .then(getOpenOrder)
+  }
+
   return (
     console.log("open orders", open_order),
     <>
@@ -49,8 +60,10 @@ const OrderList = props => {
         <ul>
           {
             open_order.line_items.map(item => {
-                console.log(item)
-                return (<li key={item.id}>{item.name}: ${item.price}</li>)
+              console.log(item.id)
+                return (<li key={item.id}>{item.name}: ${item.price}
+                <button onClick={() => deleteProductFromCart(item.id)}>Remove From Cart</button>
+                </li>)
               })
           }
         </ul>

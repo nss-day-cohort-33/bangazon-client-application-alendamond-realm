@@ -30,6 +30,16 @@ const OrderList = props => {
     props.history.push("/addpayment")
   }
 
+  const cancelOrder = () => {
+    fetch(`http://localhost:8000/orders/${open_order.id}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Token ${localStorage.getItem("token")}`
+      }
+    })
+    .then(props.history.push("/"))
+  }
+
   return (
     console.log("open orders", open_order),
     <>
@@ -39,11 +49,13 @@ const OrderList = props => {
         <ul>
           {
             open_order.line_items.map(item => {
+                console.log(item)
                 return (<li key={item.id}>{item.name}: ${item.price}</li>)
               })
           }
         </ul>
         <button onClick={confirmOrder}>Add Payment to complete order</button>
+        <button onClick={cancelOrder}>Cancel order</button>
       </main>
      :
      ""

@@ -11,21 +11,19 @@ const MyProducts = props => {
   const [myProducts, setMyProducts] = useState([]);
   const { isAuthenticated } = useSimpleAuth();
 
-  // this fetch call gets all the payment types that are specific to this user. It takes a query param of customer id, which we have saved in local storage. That's why it isn't being passed in as an argument
+  // this fetch call gets all the products that are specific to this user. It takes a query param of customer id, which we have saved in local storage. That's why it isn't being passed in as an argument
 
   const getMyProducts = () => {
     if (isAuthenticated()) {
       fetch(
-        `http://localhost:8000/products?customer=${localStorage.getItem(
-          "user_id"
-        )}`,
+        `http://localhost:8000/products`,
         {
           method: "GET",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
             Authorization: `Token ${localStorage.getItem("token")}`
-          }
+          },
         }
       )
         .then(e => e.json())
@@ -62,6 +60,7 @@ const MyProducts = props => {
               <li>{myproduct.price}</li>
               <li>Description: {myproduct.description}</li>
               <li>Quantity: {myproduct.quantity}</li>
+              <li>Sold: {myproduct.total_sold}</li>
               <br />
               <button onClick={() => deleteMyProduct(myproduct.id)}>
                 Delete

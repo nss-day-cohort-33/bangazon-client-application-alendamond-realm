@@ -45,7 +45,6 @@ const HomePage = props => {
         <h1> Welcome to Bangazon</h1>
         <h4> Here are some of our new items</h4>
         <input onKeyDown={(e) => searchProducts(e)} type="text" name="city" ref={city} placeholder="Search by city" />
-        {/* <button onClick={(e) => searchProducts(e)}>Search</button> */}
         <br /><br />
         {
         products.map(item =>{

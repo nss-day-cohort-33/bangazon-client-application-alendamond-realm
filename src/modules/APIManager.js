@@ -52,7 +52,7 @@ export default Object.create(null, {
     }
   },
   put: {
-    value(name, updatedPost) {
+    value: function(name, updatedPost) {
       return fetch(`${remoteURL}/${name}/${updatedPost.id}`, {
         "method": "PUT",
         "headers": {
@@ -61,7 +61,7 @@ export default Object.create(null, {
           "Authorization": `Token ${localStorage.getItem("token")}`
         },
         body: JSON.stringify(updatedPost)
-      }).then(data => data.json());
+      })
     }
   },
   delete: {

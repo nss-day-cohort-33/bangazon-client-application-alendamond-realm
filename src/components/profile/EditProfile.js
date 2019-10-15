@@ -5,12 +5,7 @@ import APIManager from "../../modules/APIManager";
 // import Login.css from "../../"
 
 const UpdateUser = props => {
-  const email = useRef();
-  const userName = useRef();
-  const password = useRef();
-  const verifyPassword = useRef();
-  const firstName = useRef();
-  const lastName = useRef();
+
   const address = useRef();
   const phoneNumber = useRef();
   // const { isAuthenticated } = useSimpleAuth();
@@ -22,13 +17,14 @@ const UpdateUser = props => {
 
     const updatedUser = {
       id: localStorage.getItem("user_id"),
+      user_id: localStorage.getItem("user_id"),
       address: address.current.value,
       phone_number: phoneNumber.current.value
     };
 
     //HTTP request from APIManager to update the customer object in DB
     APIManager.put("customers", updatedUser).then(() => {
-      props.history.push("/myaccount");
+      props.history.push("/myaccount")
     })};
 
     //Edit form that user will use to fill out new information
@@ -37,9 +33,8 @@ const UpdateUser = props => {
         <main style={{ textAlign: "center" }}>
           <form className="form--login" onSubmit={handleUpdate}>
             <h1 className="h3 mb-3 font-weight-normal">
-              Register for Bangazon
+              Edit Form
             </h1>
-
             <fieldset>
               <label htmlFor="inputAddress"> Address </label>
               <input
@@ -62,28 +57,6 @@ const UpdateUser = props => {
                 required
               />
             </fieldset>
-            {/* <fieldset>
-              <label htmlFor="inputPassword"> Password </label>
-              <input
-                ref={password}
-                type="password"
-                name="password"
-                className="form-control"
-                placeholder="Password"
-                required
-              />
-            </fieldset>
-            <fieldset>
-              <label htmlFor="verifyPassword"> Verify Password </label>
-              <input
-                ref={verifyPassword}
-                type="password"
-                name="verifyPassword"
-                className="form-control"
-                placeholder="Verify password"
-                required
-              />
-            </fieldset> */}
             <fieldset>
               <button type="submit">Submit Update</button>
             </fieldset>

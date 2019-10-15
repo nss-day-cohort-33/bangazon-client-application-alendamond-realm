@@ -20,19 +20,22 @@ const HomePage = props => {
             setProducts(response.reverse())
         })
     }
-    const searchProducts = () => {
-        const input = city.current.value.toLowerCase()
-        fetch(`http://localhost:8000/products?city=${input}`, {
-            "method": "GET",
-            "headers": {
-              "Accept": "application/json",
-              "Content-Type": "application/json",
-            }
-        })
-        .then(response => response.json())
-        .then((response) => {
-            setProducts(response.reverse())
-        })
+    const searchProducts = (e) => {
+        if (e.keyCode === 13) {
+            let input = city.current.value
+            input = input.charAt(0).toUpperCase() + input.slice(1)
+            fetch(`http://localhost:8000/products?city=${input}`, {
+                "method": "GET",
+                "headers": {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                }
+            })
+            .then(response => response.json())
+            .then((response) => {
+                setProducts(response.reverse())
+            })
+        }
     }
 
  useEffect(getQuantity, [])
@@ -41,8 +44,8 @@ const HomePage = props => {
     <>
         <h1> Welcome to Bangazon</h1>
         <h4> Here are some of our new items</h4>
-        <input type="text" name="city" ref={city} placeholder="Search by city" />
-        <button onClick={(e) => searchProducts(e)}>Search</button>
+        <input onKeyDown={(e) => searchProducts(e)} type="text" name="city" ref={city} placeholder="Search by city" />
+        {/* <button onClick={(e) => searchProducts(e)}>Search</button> */}
         <br /><br />
         {
         products.map(item =>{

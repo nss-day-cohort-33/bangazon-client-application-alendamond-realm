@@ -1,106 +1,105 @@
-import React, { useEffect, useState, useRef } from "react"
-import APIManager from "../../modules/APIManager"
-
+import React, { useEffect, useState, useRef } from "react";
+import APIManager from "../../modules/APIManager";
+import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
 
 const AddPaymentTypes = props => {
-    const [paymenttypeList, setPaymentTypeList] = useState([])
+  const [paymenttypeList, setPaymentTypeList] = useState([]);
 
-    const [merchantName, setMerchantName] = useState("")
-    const [acctNumber, setAcctNumber] = useState("")
-    const [expirationDate, setExpirationDate] = useState("")
+  const merchant = useRef();
+  const accountNumber = useRef();
+  const expireDate = useRef();
+  const createDate = useRef();
+  const { isAuthenticated } = useSimpleAuth();
 
-    const handleOnChangeMerchantName = event => {
-        setMerchantName(event.target.value)
+  const createPayment = () => {
+    const expire = `${expireDate.current.value}-01`;
+    if (isAuthenticated()) {
+      fetch(`http://localhost:8000/paymenttypes`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Token ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify({
+          merchant_name: merchant.current.value,
+          acct_number: accountNumber.current.value,
+          expiration_date: expire
+        })
+      })
+        .then(response => response.json())
+        .then(() => {
+          APIManager.getAll("paymenttypes").then(allTheItems => {
+            setPaymentTypeList(allTheItems);
+          });
+        });
     }
+  };
 
-    const handleOnChangeAcctNumber = event => {
-        setAcctNumber(event.target.value)
-    }
+  const getAllPaymentTypes = () => {
+    APIManager.getAll("paymenttypes").then(allTheItems => {
+      console.log("from payment types", allTheItems);
+      setPaymentTypeList(allTheItems);
+    });
+  };
 
-    const handleOnChangeExpirationDate = event => {
-        setExpirationDate(event.target.value)
-    }
+  useEffect(getAllPaymentTypes, []);
 
-    const handleOnClickAddPaymentTypeButton = () => {
-        if (merchantName === "" || acctNumber === "" || expirationDate === "") {
-            window.alert("Please fill in all fields")
-        } else {
-            const newPaymentInfo = {
-                merchant_name: merchantName,
-                acct_number: acctNumber,
-                expiration_date: expirationDate
-            }
-
-            APIManager.post("paymenttypes", newPaymentInfo).then(() => {
-                APIManager.getAll("paymenttypes")
-                    .then((allTheItems) => {
-                        console.log("from payment types", allTheItems)
-                        setPaymentTypeList(allTheItems)
-                    })
-            })
-        }
-    }
-
-    const getAllPaymentTypes = () => {
-        APIManager.getAll("paymenttypes")
-            .then((allTheItems) => {
-                console.log("from payment types", allTheItems)
-                setPaymentTypeList(allTheItems)
-            })
-    }
-
-    useEffect(getAllPaymentTypes, [])
-
-    return (
-        <>
-            <h3>Existing Payment Types</h3>
-            <div className="paymentTypeItems">
-                {
-                    paymenttypeList.map((item) => {
-                        return <div key={item.id}>
-                            <p>{item.merchant_name}</p>
-                        </div>
-                    })
-                }
+  return (
+    <>
+      <h3>Existing Payment Types</h3>
+      <div className="paymentTypeItems">
+        {paymenttypeList.map(item => {
+          return (
+            <div key={item.id}>
+              <p>{item.merchant_name}</p>
             </div>
-            <h3>Add a Payment Type</h3>
-            <div className="form-container w-25">
-                <div className="form-group">
-                    <label htmlFor="add-merchant">Merchant Name</label>
-                    <input
-                        value={merchantName}
-                        className="form-control"
-                        id="add-merchant"
-                        placeholder="Enter a Merchant"
-                        onChange={handleOnChangeMerchantName}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="add-acctnumber">Account Number</label>
-                    <input
-                        value={acctNumber}
-                        className="form-control"
-                        id="add-acctnumber"
-                        placeholder="Enter an Account Number"
-                        onChange={handleOnChangeAcctNumber}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="add-expirationdate">Expiration Date</label>
-                    <input
-                        value={expirationDate}
-                        className="form-control"
-                        id="add-expirationDate"
-                        placeholder="Enter an Expiration Date"
-                        onChange={handleOnChangeExpirationDate}
-                    />
-                </div>
-            </div>
-            <div className="btn btn-primary mb-2">
-                <button onClick={handleOnClickAddPaymentTypeButton}>Add Payment Type</button>
-            </div>
-        </>
-    )
-}
+          );
+        })}
+      </div>
+      <h3>Add a Payment Type</h3>
+      <form
+        className="payment-type-form"
+        onSubmit={e => {
+          e.preventDefault();
+          createPayment()
+          props.history.push("/deletepayment")
+        }}
+      >
+        <fieldset>
+          <label htmlFor="merchant">Merchant:</label>
+          <input type="text" ref={merchant} name="merchant" required></input>
+        </fieldset>
+        <fieldset>
+          <label htmlFor="account-number">Account Number:</label>
+          <input
+            type="text"
+            ref={accountNumber}
+            name="account-number"
+            required
+          ></input>
+        </fieldset>
+        <fieldset>
+          <label htmlFor="expire-date">Expiration Date:</label>
+          <input
+            type="month"
+            ref={expireDate}
+            name="expire-date"
+            min={new Date().toISOString().slice(0, 7)}
+            required
+          ></input>
+        </fieldset>
+        <input
+          type="date"
+          ref={createDate}
+          name="expire-date"
+          defaultValue={new Date().toISOString().slice(0, 10)}
+          hidden
+        ></input>
+        <button type="submit">Add Payment</button>
+      </form>
+    </>
+  );
+};
 
-export default AddPaymentTypes
+export default AddPaymentTypes;

@@ -4,7 +4,8 @@ import APIManager from "../../modules/APIManager";
 import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
 
 const SelectPayment = props => {
-  const [paymenttypeList, setPaymentTypeList] = useState([]);
+  const [paymenttypeList, setPaymentTypeList] = useState([])
+  const [openOrder, setOrder] = useState([])
 
   const payment_type = useRef();
 //   const accountNumber = useRef();
@@ -12,13 +13,29 @@ const SelectPayment = props => {
 //   const createDate = useRef();
   const { isAuthenticated } = useSimpleAuth();
 
-  const addPaymentToOrder = (payment) => {
-    // const updatedOrder = {
-    //     payment_type_id: payment_type.current.value
-    // }
-    // console.log(updatedOrder)
-    // APIManager.put("orders", updatedOrder)
-    fetch(`http://localhost:8000/orders/${payment_type.current.value}`, {
+  const getOpenOrder = () => {
+    fetch(`http://localhost:8000/orders?orderlist=true`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": `Token ${localStorage.getItem("token")}`
+      }
+    })
+    .then(response => {
+      console.log('response', response );
+      return response.json()
+    })
+    .then(setOrder)
+    // .then(response => response.json())
+    // .then(response => {
+    //     console.log(response)
+    //   setOrder(response);
+    // });
+  }
+
+  const addPaymentToOrder = () => {
+    fetch(`http://localhost:8000/orders/${openOrder.id}`, {
         "method": "PUT",
         "headers": {
             "Accept": "application/json",
@@ -31,36 +48,13 @@ const SelectPayment = props => {
     })
         .then(() => {
             console.log("Edited")
-            console.log(payment_type.current.value)
-
         })
-        // .then(getItineraryItems)
+        // .then(() => {
+        //     props.history.push("/products")
+        // })
 }
 
-//   const createPayment = () => {
-//     const expire = `${expireDate.current.value}-01`;
-//     if (isAuthenticated()) {
-//       fetch(`http://localhost:8000/paymenttypes`, {
-//         method: "POST",
-//         headers: {
-//           Accept: "application/json",
-//           "Content-Type": "application/json",
-//           Authorization: `Token ${localStorage.getItem("token")}`
-//         },
-//         body: JSON.stringify({
-//           merchant_name: merchant.current.value,
-//           acct_number: accountNumber.current.value,
-//           expiration_date: expire
-//         })
-//       })
-//         .then(response => response.json())
-//         .then(() => {
-//           APIManager.getAll("paymenttypes").then(allTheItems => {
-//             setPaymentTypeList(allTheItems);
-//           });
-//         });
-//     }
-//   };
+
 
   const getAllPaymentTypes = () => {
     APIManager.getAll("paymenttypes").then(allTheItems => {
@@ -69,10 +63,15 @@ const SelectPayment = props => {
     });
   };
 
-  useEffect(getAllPaymentTypes, []);
+  useEffect(() => {
+    getAllPaymentTypes()
+    getOpenOrder()
+  }, []);
 
+  console.log("order", openOrder)
   return (
-    <>
+      <>
+      {!openOrder ?
       <div>
         <strong>Select an existing payment type to complete your order</strong>
         <br />
@@ -94,7 +93,7 @@ const SelectPayment = props => {
       <br />
       <Link to="/addpayment">Add a new payment type</Link>
       </div>
-
+      : "You don't have any active orders"}
     </>
   );
 };

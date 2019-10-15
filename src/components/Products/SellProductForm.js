@@ -35,12 +35,17 @@ const addToProducts = (e) => {
 
 }
 // post request from API manager that connects create method on server side to post on client side
+if ( price.current.value < .01 || price.current.value > 10000) {
+  window.alert("Product price must be greater than $0 and cannot exceed $10,000")
+}
+else {
   APIManager.post("products", newProductInfo)
       .then(() => {
           props.history.push("/products")
       })
-}
 
+}
+}
 // function gets all product types - we need to get all product types because we need to view all of them in our dropdown
   const getProductTypes= () => {
     fetch(`http://localhost:8000/producttypes`, {

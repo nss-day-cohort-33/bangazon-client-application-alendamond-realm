@@ -43,8 +43,6 @@ const AddPaymentTypes = props => {
     });
   };
 
-
-
   useEffect(getAllPaymentTypes, []);
 
   return (
@@ -65,6 +63,7 @@ const AddPaymentTypes = props => {
         onSubmit={e => {
           e.preventDefault();
           createPayment()
+          props.history.push("/deletepayment")
         }}
       >
         <fieldset>

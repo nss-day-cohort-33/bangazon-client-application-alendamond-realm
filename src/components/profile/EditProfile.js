@@ -8,6 +8,7 @@ const UpdateUser = props => {
 
   const address = useRef();
   const phoneNumber = useRef();
+  const lastName = useRef();
   // const { isAuthenticated } = useSimpleAuth();
 
   //function that updates the customer object in the DB
@@ -19,7 +20,8 @@ const UpdateUser = props => {
       id: localStorage.getItem("user_id"),
       user_id: localStorage.getItem("user_id"),
       address: address.current.value,
-      phone_number: phoneNumber.current.value
+      phone_number: phoneNumber.current.value,
+      last_name: lastName.current.value
     };
 
     //HTTP request from APIManager to update the customer object in DB
@@ -42,7 +44,7 @@ const UpdateUser = props => {
                 type="text"
                 name="address"
                 className="form-control"
-                placeholder="Address"
+                placeholder="address"
                 required
               />
             </fieldset>
@@ -54,6 +56,17 @@ const UpdateUser = props => {
                 name="phoneNumber"
                 className="form-control"
                 placeholder="Phone number"
+                required
+              />
+            </fieldset>
+            <fieldset>
+              <label htmlFor="inputLastName"> Last Name </label>
+              <input
+                ref={lastName}
+                type="text"
+                name="lastName"
+                className="form-control"
+                placeholder="Last Name"
                 required
               />
             </fieldset>

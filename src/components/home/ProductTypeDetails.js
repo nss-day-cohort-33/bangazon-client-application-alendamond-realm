@@ -10,11 +10,6 @@ const ProductTypeDetails = props => {
   const [singleType, setType] = useState([]);
   const [productsList, setProductsList] = useState([]);
 
-  // Gets a single product type by its product type id and sets state
-  // const getSingleType = () => {
-  //     APIManager.get("producttypes", props.match.params.productTypeId)
-  //     .then(setType)
-  // }
   const getSingleType = () => {
     fetch(`http://localhost:8000/products/${props.match.params.productTypeId}`, {
       method: "GET",

@@ -27,7 +27,6 @@ const CustomerProfile = props => {
     <>
       <main className="explorer">
         {customerProfile.map(profile => {
-          console.log("profile", profile)
           if (profile.user_id == localStorage.getItem("user_id")) {
             return (
               <div>
@@ -44,6 +43,13 @@ const CustomerProfile = props => {
                 <a href="/deletepayment">
                   <h4>Payment Options</h4>
                 </a>
+                <button
+                  onClick={() => {
+                    props.history.push("/editaccount");
+                  }}
+                >
+                  Edit
+                </button>
               </div>
             );
           }

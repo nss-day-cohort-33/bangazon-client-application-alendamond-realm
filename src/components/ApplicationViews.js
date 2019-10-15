@@ -1,6 +1,7 @@
 import { Route } from "react-router-dom"
 import React, { useState, useEffect } from "react"
 import { withRouter, Redirect } from "react-router-dom"
+import useSimpleAuth from "../hooks/ui/useSimpleAuth"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
 import OrderList from "./orders/Orders"
@@ -14,7 +15,7 @@ import ProductTypeDetails from "./home/ProductTypeDetails"
 import ProductDetail from "./Products/ProductDetail"
 import SellProductForm from "./Products/SellProductForm"
 import MyProducts from "./Products/MyProducts"
-import useSimpleAuth from "../hooks/ui/useSimpleAuth"
+import UpdateUser from "./profile/EditProfile"
 
 
 
@@ -114,6 +115,19 @@ const ApplicationViews = () => {
                         <>
                             <h1>My Account</h1>
                             <CustomerProfile {...props} />
+                        </>
+                    )
+                    else return <Redirect to="/login"/>
+                }}
+            />
+
+
+            <Route
+                path="/editaccount" render={props => {
+                    if(isAuthenticated())  return (
+                        <>
+                            <h1>Edit Account</h1>
+                            <UpdateUser {...props} />
                         </>
                     )
                     else return <Redirect to="/login"/>

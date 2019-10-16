@@ -29,7 +29,7 @@ const OrderHistory = props => {
                     allOrders.map(order => {
                         return (
                             <div key={order.id}>
-                                <h4>Order #{order.id}</h4>
+                                <a href={`/orders/${order.id}`}><h5>Order #{order.id}</h5></a>
                             </div>
                         )
                     })

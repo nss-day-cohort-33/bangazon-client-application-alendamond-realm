@@ -6,6 +6,7 @@ import Register from "./auth/Register"
 import Login from "./auth/Login"
 import OrderList from "./orders/Orders"
 import OrderHistory from "./orders/OrderHistory"
+import OrderDetails from "./orders/OrderDetails"
 import CustomerProfile from "./profile/Profile"
 import AddPaymentTypes from "./paymenttypes/AddPaymentTypes"
 import DeletePaymentTypes from "./paymenttypes/DeletePaymentTypes"
@@ -59,7 +60,7 @@ const ApplicationViews = () => {
             />
 
             <Route
-                path="/orders" render={props => {
+                exact path="/orders" render={props => {
                     if(isAuthenticated()) return (
                         <>
                             <OrderList {...props} />
@@ -68,12 +69,36 @@ const ApplicationViews = () => {
                     else return <Redirect to="/login"/>
                 }}
             />
+            <Route
+                path="/orders/:orderId(\d+)" render={props => {
+                    if (isAuthenticated()) {
+                        return <OrderDetails {...props} />
+                    } else {
+                        return <Redirect to="/login" />
+                    }
+                }}
+            />
+
+            <Route
+                path="/orderhistory" render={props => {
+                    if (isAuthenticated()) {
+                        return <OrderHistory {...props} />
+                    } else {
+                        return <Redirect to="/login" />
+                    }
+                }}
+            />
 
             <Route
                 exact path="/myproducts" render={props => {
-                    return <MyProducts {...props}  />
+                    if (isAuthenticated()) {
+                        return <MyProducts {...props}  />
+                    } else {
+                        return <Redirect to="/login" />
+                    }
                 }}
             />
+
             <Route
                 exact path="/products" render={props => {
                     return <ProductTypes {...props} />
@@ -110,18 +135,6 @@ const ApplicationViews = () => {
                     else return <Redirect to="/login"/>
                 }}
             />
-
-
-            <Route
-                path="/orderhistory" render={props => {
-                    if (isAuthenticated()) {
-                        return <OrderHistory {...props} />
-                    } else {
-                        return <Redirect to="/login" />
-                    }
-                }}
-            />
-
 
             <Route exact path="/products/:productId(\d+)" render={(props) => {
                 return <ProductDetail  {...props} />

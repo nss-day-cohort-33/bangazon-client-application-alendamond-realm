@@ -29,7 +29,7 @@ const CustomerProfile = props => {
         {customerProfile.map(profile => {
           if (profile.user_id == localStorage.getItem("user_id")) {
             return (
-              <div>
+              <div key={profile.id}>
                 <ul>
                   <li>Name: {profile.user.first_name} {profile.user.last_name}</li>
                   <li>Email: {profile.user.email}</li>
@@ -41,6 +41,9 @@ const CustomerProfile = props => {
                 </a>
                 <a href="/deletepayment">
                   <h4>Payment Options</h4>
+                </a>
+                <a href="/orderhistory">
+                  <h4>Order History</h4>
                 </a>
                 <button
                   onClick={() => {

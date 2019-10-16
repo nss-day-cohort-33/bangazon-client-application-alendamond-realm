@@ -1,6 +1,7 @@
 import APIManager from "../../modules/APIManager";
 import React, { useEffect, useState } from "react";
 import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
+import SelectPayment from "../paymenttypes/SelectPaymentType";
 
 // Author: Curt Cato
 // Purpose: Provide the user with a view of open orders
@@ -18,7 +19,6 @@ const OrderList = props => {
       }
     })
     .then(response => {
-      console.log('response', response );
       return response.json()
     })
     .then(setOrder)
@@ -27,7 +27,7 @@ const OrderList = props => {
   useEffect(getOpenOrder, [])
 
   const confirmOrder = () => {
-    props.history.push("/addpayment")
+    props.history.push("/payment")
   }
 
   const cancelOrder = () => {
@@ -57,9 +57,9 @@ const OrderList = props => {
   }
   let count = 0
   return (
-    console.log("open orders", open_order),
+    // console.log("open orders", open_order),
     <>
-     {open_order ?
+     {open_order.line_items.length > 0 ?
       <main className="order-items">
         <h2>My Cart</h2>
         <ul>
@@ -72,12 +72,12 @@ const OrderList = props => {
               })
           }
         </ul>
-        <button onClick={confirmOrder}>Add Payment to complete order</button>
-        <button onClick={cancelOrder}>Cancel order</button>
+        {/* <button onClick={confirmOrder}>Add Payment to complete order</button> */}
+        <SelectPayment {...props} open_order={open_order}/>
+        <br />
+        <button className="btn-danger" onClick={cancelOrder}>Cancel order</button>
       </main>
-     :
-     ""
-        }
+     : "You don't have any active orders"}
     </>
   )
 }

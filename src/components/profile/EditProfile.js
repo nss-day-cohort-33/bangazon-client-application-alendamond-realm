@@ -61,7 +61,7 @@ const UpdateUser = props => {
                 type="text"
                 name="address"
                 className="form-control"
-                placeholder={profile.address}
+                defaultValue={profile.address}
                 required
               />
             </fieldset>
@@ -72,7 +72,7 @@ const UpdateUser = props => {
                 type="text"
                 name="phoneNumber"
                 className="form-control"
-                placeholder={profile.phone_number}
+                defaultValue={profile.phone_number}
                 required
               />
             </fieldset>
@@ -83,7 +83,7 @@ const UpdateUser = props => {
                 type="text"
                 name="lastName"
                 className="form-control"
-                placeholder={profile.user.last_name}
+                defaultValue={profile.user.last_name}
                 required
               />
             </fieldset>

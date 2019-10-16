@@ -54,7 +54,7 @@ const MyProducts = props => {
       <h1>My Products</h1>
       {myProducts.map(myproduct => {
         return (
-          <div className="card">
+          <div key={myproduct.id} className="card">
             <ul>
               <li>{myproduct.name}</li>
               <li>{myproduct.price}</li>

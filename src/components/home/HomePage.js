@@ -42,21 +42,28 @@ const HomePage = props => {
 
  return (
     <>
+
         <h1> Welcome to Bangazon</h1>
         <h4> Here are some of our new items</h4>
         <input onKeyDown={(e) => searchProducts(e)} className="search-bar" type="text" name="city" ref={city} placeholder="Search by city" />
         <br /><br />
-        {
-        products.map(item =>{
-            console.log(item)
-            return(<div key={item.id} className={`productId-${item.id}`}>
-                <Link className="nav-link" to={`/products/${item.id}`}>
-                <p>{item.name}</p>
-                </Link>
-                </div>
-                )
-        })
-        }
+        {products.length > 0 ?
+            <div>
+                {
+                    products.map(item => {
+                        console.log(item)
+                        return(<div key={item.id} className={`productId-${item.id}`}>
+                            <Link className="nav-link" to={`/products/${item.id}`}>
+                            <p>{item.name}</p>
+                            </Link>
+                            </div>
+                            )
+                        })
+                }
+            </div>
+        :   <div>
+                <p>Sorry, there are no products currently being sold here.</p>
+            </div>}
     </>
  )
 }

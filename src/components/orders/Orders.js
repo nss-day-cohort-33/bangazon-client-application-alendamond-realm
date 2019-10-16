@@ -19,7 +19,6 @@ const OrderList = props => {
       }
     })
     .then(response => {
-      console.log('response', response );
       return response.json()
     })
     .then(setOrder)
@@ -42,27 +41,24 @@ const OrderList = props => {
   }
 
   return (
-    console.log("open orders", open_order),
+    // console.log("open orders", open_order),
     <>
-     {open_order ?
+     {open_order.line_items.length > 0 ?
       <main className="order-items">
         <h2>My Cart</h2>
         <ul>
           {
-            open_order.line_items.map(item => {
-                console.log(item)
-                return (<li key={item.id}>{item.name}: ${item.price}</li>)
+            open_order.line_items.map((item, index) => {
+                return <li key={index}>{item.name}: ${item.price}</li>
               })
           }
         </ul>
         {/* <button onClick={confirmOrder}>Add Payment to complete order</button> */}
-        <SelectPayment />
+        <SelectPayment {...props} />
         <br />
         <button className="btn-danger" onClick={cancelOrder}>Cancel order</button>
       </main>
-     :
-     ""
-        }
+     : "You don't have any active orders"}
     </>
   )
 }

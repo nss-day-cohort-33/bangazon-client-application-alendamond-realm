@@ -1,40 +1,28 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import APIManager from "../../modules/APIManager";
-import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
+import useModal from "../../hooks/ui/useModal"
 
 const SelectPayment = props => {
-  const [paymenttypeList, setPaymentTypeList] = useState([])
-  const [openOrder, setOrder] = useState([])
+    const [paymenttypeList, setPaymentTypeList] = useState([])
+    const [openOrder, setOrder] = useState([])
+    const { toggleDialog, modalIsOpen } = useModal("#order-dialog")
+    const payment_type = useRef();
 
-  const payment_type = useRef();
-//   const accountNumber = useRef();
-//   const expireDate = useRef();
-//   const createDate = useRef();
-  const { isAuthenticated } = useSimpleAuth();
+    const getOpenOrder = () => {
+        fetch(`http://localhost:8000/orders?orderlist=true`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Token ${localStorage.getItem("token")}`
+        }
+        })
+        .then(response => response.json())
+        .then(setOrder)
+    }
 
-  const getOpenOrder = () => {
-    fetch(`http://localhost:8000/orders?orderlist=true`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Authorization": `Token ${localStorage.getItem("token")}`
-      }
-    })
-    .then(response => {
-      console.log('response', response );
-      return response.json()
-    })
-    .then(setOrder)
-    // .then(response => response.json())
-    // .then(response => {
-    //     console.log(response)
-    //   setOrder(response);
-    // });
-  }
-
-  const addPaymentToOrder = () => {
+    const addPaymentToOrder = () => {
     fetch(`http://localhost:8000/orders/${openOrder.id}`, {
         "method": "PUT",
         "headers": {
@@ -48,54 +36,71 @@ const SelectPayment = props => {
     })
         .then(() => {
             console.log("Edited")
+            // setConfirmation("Your order has been received. Thank you for shopping with Bangazon.")
+            // setTimeout(() => {
+            //   setConfirmation("")
+            //   toggleDialog(false)
+            // }, 2000);
         })
-        // .then(() => {
-        //     props.history.push("/products")
-        // })
-}
 
+    }
 
+    const getAllPaymentTypes = () => {
+        APIManager.getAll("paymenttypes").then(response => {
+            setPaymentTypeList(response);
+        });
+    };
 
-  const getAllPaymentTypes = () => {
-    APIManager.getAll("paymenttypes").then(allTheItems => {
-      console.log("from payment types", allTheItems);
-      setPaymentTypeList(allTheItems);
-    });
-  };
-
-  useEffect(() => {
+    useEffect(() => {
     getAllPaymentTypes()
     getOpenOrder()
-  }, []);
+    const handler = e => {
+        // Close all dialogs when ESC is pressed, and close search field
+        if (e.keyCode === 27) {
+            if (modalIsOpen) {
+                toggleDialog(false)
+            }
+        }
+    }
+    window.addEventListener("keyup", handler)
+    return () => window.removeEventListener("keyup", handler)
+    }, []);
 
-  console.log("order", openOrder)
-  return (
-      <>
-      {!openOrder ?
-      <div>
-        <strong>Select an existing payment type to complete your order</strong>
-        <br />
-        <select
-          type="payment_type"
-          name="payment_type"
-          ref={payment_type}
-        >
-          {/* <option>Select Payment Type</option> */}
-          {paymenttypeList.map(item => {
-            return (
-              <option key={item.id} value={item.id}>
-                {item.merchant_name}
-              </option>
-            );
-          })}
-          </select>
-        <button onClick={addPaymentToOrder}>Select</button>
-      <br />
-      <Link to="/addpayment">Add a new payment type</Link>
-      </div>
-      : "You don't have any active orders"}
-    </>
-  );
+    return (
+        <>
+            <div>
+                <dialog id="order-dialog" className="order-dialog">
+                    <h2>Thank you for your order</h2>
+                    <h5>Order number: #{openOrder.id}</h5>
+                    <p>Your order has been received and is now being processed. Thank you for shopping with Bangazon.</p>
+                    <button style={{position: "absolute", top: "0.25em", right: "0.25em"}}
+                        id="closeBtn"
+                        onClick={() => {toggleDialog(false); props.history.push("/myaccount")}}>x</button>
+                </dialog>
+            </div>
+            <div>
+                <strong>Select an existing payment type to complete your order</strong>
+                <br />
+                <select
+                    type="payment_type"
+                    name="payment_type"
+                    ref={payment_type}
+                >
+                    {/* <option>Select Payment Type</option> */}
+                    {paymenttypeList.map(item => {
+                    return (
+                        <option key={item.id} value={item.id}>
+                        {item.merchant_name}
+                        </option>
+                    );
+                    })}
+                    </select>
+                <button onClick={() => {addPaymentToOrder(); toggleDialog(true)}}>Select</button>
+                <br />
+                <Link to="/addpayment">Add a new payment type</Link>
+            </div>
+        </>
+    );
 };
 
 export default SelectPayment;

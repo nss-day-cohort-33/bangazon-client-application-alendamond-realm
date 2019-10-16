@@ -23,11 +23,7 @@ const ApplicationViews = () => {
     const { isAuthenticated } = useSimpleAuth()
 
     const [productsList, setProductsList] = useState([])
-    const [ordersList, setOrdersList] = useState([])
-    const [paymentTypesList, setPaymentTypesList] = useState([])
-    const [customersList, setCustomersList] = useState([])
     const [productTypesList, setProductTypesList] = useState([])
-    const [ordersProductsList, setOrdersProductsList] = useState([])
 
     const getProducts = () => {
         APIManager.getAll("products")

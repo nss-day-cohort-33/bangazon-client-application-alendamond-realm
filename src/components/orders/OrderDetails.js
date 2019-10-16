@@ -41,9 +41,9 @@ const OrderDetails = props => {
             return (
               <div key={index}>
 
-                  <h5>
+                  <h4>
                     <strong>{item.name}</strong>
-                  </h5>
+                  </h4>
 
                 <p>
                   ${item.price}

@@ -5,13 +5,13 @@ import useSimpleAuth from "../hooks/ui/useSimpleAuth"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
 import OrderList from "./orders/Orders"
+import OrderHistory from "./orders/OrderHistory"
 import CustomerProfile from "./profile/Profile"
 import AddPaymentTypes from "./paymenttypes/AddPaymentTypes"
 import DeletePaymentTypes from "./paymenttypes/DeletePaymentTypes"
 import HomePage from "./home/HomePage"
-import APIManager from "../modules/APIManager"
-import ProductTypes from "./home/ProductTypes"
-import ProductTypeDetails from "./home/ProductTypeDetails"
+import ProductTypes from "./productTypes/ProductTypes"
+import ProductTypeDetails from "./productTypes/ProductTypeDetails"
 import ProductDetail from "./Products/ProductDetail"
 import SellProductForm from "./Products/SellProductForm"
 import MyProducts from "./Products/MyProducts"
@@ -21,24 +21,6 @@ import UpdateUser from "./profile/EditProfile"
 
 const ApplicationViews = () => {
     const { isAuthenticated } = useSimpleAuth()
-
-    const [productsList, setProductsList] = useState([])
-    const [productTypesList, setProductTypesList] = useState([])
-
-    const getProducts = () => {
-        APIManager.getAll("products")
-            .then(setProductsList)
-    }
-
-    const getProductTypes = () => {
-        APIManager.getAll("producttypes")
-            .then(setProductTypesList)
-    }
-
-    useEffect(() => {
-        getProducts()
-        getProductTypes()
-    }, [])
 
     return (
         <React.Fragment>
@@ -94,16 +76,15 @@ const ApplicationViews = () => {
             />
             <Route
                 exact path="/products" render={props => {
-                    return <ProductTypes {...props} productTypesList={productTypesList} productsList={productsList} getProductTypes={getProductTypes} getProducts={getProducts} />
+                    return <ProductTypes {...props} />
                 }}
             />
 
             <Route
                 exact path="/productlist/:productTypeId(\d+)" render={props => {
-                    return <ProductTypeDetails {...props} productTypesList={productTypesList} productsList={productsList} getProductTypes={getProductTypes} getProducts={getProducts} />
+                    return <ProductTypeDetails {...props} />
                 }}
             />
-
 
             <Route
                 path="/myaccount" render={props => {
@@ -131,11 +112,15 @@ const ApplicationViews = () => {
             />
 
 
-            {/* <Route
-                path="/ordersproducts" render={props => {
-                    return <OrderProducts {...props}  ordersProductsList={ordersProductsList} />
+            <Route
+                path="/orderhistory" render={props => {
+                    if (isAuthenticated()) {
+                        return <OrderHistory {...props} />
+                    } else {
+                        return <Redirect to="/login" />
+                    }
                 }}
-            /> */}
+            />
 
 
             <Route exact path="/products/:productId(\d+)" render={(props) => {

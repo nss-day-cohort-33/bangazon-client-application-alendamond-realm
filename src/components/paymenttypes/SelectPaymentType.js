@@ -45,16 +45,6 @@ const SelectPayment = props => {
     useEffect(() => {
     getAllPaymentTypes()
     getOpenOrder()
-    const handler = e => {
-        // Close all dialogs when ESC is pressed, and close search field
-        if (e.keyCode === 27) {
-            if (modalIsOpen) {
-                toggleDialog(false)
-            }
-        }
-    }
-    window.addEventListener("keyup", handler)
-    return () => window.removeEventListener("keyup", handler)
     }, []);
 
     return (
@@ -66,7 +56,7 @@ const SelectPayment = props => {
                     <p>Your order has been received and is now being processed. Thank you for shopping with Bangazon.</p>
                     <button style={{position: "absolute", top: "0.25em", right: "0.25em"}}
                         id="closeBtn"
-                        onClick={() => {toggleDialog(false); props.history.push("/myaccount")}}>x</button>
+                        onClick={() => {toggleDialog(false); props.history.push("/orderhistory")}}>x</button>
                 </dialog>
             </div>
             <div>

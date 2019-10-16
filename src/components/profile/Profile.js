@@ -42,6 +42,9 @@ const CustomerProfile = props => {
                 <a href="/deletepayment">
                   <h4>Payment Options</h4>
                 </a>
+                <a href="/orderhistory">
+                  <h4>Order History</h4>
+                </a>
                 <button
                   onClick={() => {
                     props.history.push("/editaccount");

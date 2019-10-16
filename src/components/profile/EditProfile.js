@@ -53,40 +53,40 @@ const UpdateUser = props => {
         {customerEdit.map(profile => {
           if (profile.user_id == localStorage.getItem("user_id")) {
             return (
-              <div>
-            <fieldset>
-              <label htmlFor="inputAddress"> Address </label>
-              <input
-                ref={address}
-                type="text"
-                name="address"
-                className="form-control"
-                placeholder={profile.address}
-                required
-              />
-            </fieldset>
-            <fieldset>
-              <label htmlFor="inputPhoneNumber"> Phone Number </label>
-              <input
-                ref={phoneNumber}
-                type="text"
-                name="phoneNumber"
-                className="form-control"
-                placeholder={profile.phone_number}
-                required
-              />
-            </fieldset>
-            <fieldset>
-              <label htmlFor="inputLastName"> Last Name </label>
-              <input
-                ref={lastName}
-                type="text"
-                name="lastName"
-                className="form-control"
-                placeholder={profile.user.last_name}
-                required
-              />
-            </fieldset>
+            <div key={profile.id}>
+              <fieldset>
+                <label htmlFor="inputAddress"> Address </label>
+                <input
+                  ref={address}
+                  type="text"
+                  name="address"
+                  className="form-control"
+                  placeholder={profile.address}
+                  required
+                />
+              </fieldset>
+              <fieldset>
+                <label htmlFor="inputPhoneNumber"> Phone Number </label>
+                <input
+                  ref={phoneNumber}
+                  type="text"
+                  name="phoneNumber"
+                  className="form-control"
+                  placeholder={profile.phone_number}
+                  required
+                />
+              </fieldset>
+              <fieldset>
+                <label htmlFor="inputLastName"> Last Name </label>
+                <input
+                  ref={lastName}
+                  type="text"
+                  name="lastName"
+                  className="form-control"
+                  placeholder={profile.user.last_name}
+                  required
+                />
+              </fieldset>
             </div>
               );
             }

@@ -47,34 +47,6 @@ const AddPaymentTypes = props => {
 
   return (
     <>
-      {/* <div>
-        <h3>Existing Payment Types</h3>
-        <select
-          type="payment_type"
-          name="payment_type"
-          ref={merchant}
-        >
-          <option>Select Payment Type</option>
-          {paymenttypeList.map(item => {
-            return (
-              <option key={item.id} value={item.id}>
-                {item.merchant_name}
-              </option>
-            );
-          })}
-          </select>
-      </div>
-      <button>Select</button>
-      <br /> */}
-      {/* <div className="paymentTypeItems">
-        {paymenttypeList.map(item => {
-          return (
-            <div key={item.id}>
-              <p>{item.merchant_name}</p>
-            </div>
-          );
-        })}
-      </div> */}
       <div>
         <h3>Add a New Payment Type</h3>
         <br />

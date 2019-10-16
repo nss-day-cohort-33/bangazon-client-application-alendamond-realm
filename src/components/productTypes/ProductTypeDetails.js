@@ -70,7 +70,7 @@ const ProductTypeDetails = props => {
                 <p className="card-body">
                   ${product.price}
                   <br />
-                  Quantity: <em>{product.quantity}</em>
+                  Quantity: <em>{product.quantity - product.total_sold}</em>
                 </p>
               </div>
             );

@@ -52,15 +52,15 @@ const ProductDetail = props => {
     return (
         <>
             {
-                <section className="product-details">
-                    <h3>{singleProduct.name}</h3>
-                    <p>${singleProduct.price}</p>
-                    <p>{singleProduct.description}</p>
-                    <p>Quantity: {singleProduct.quantity}</p>
-                    <br/>
-                    <button onClick = {addToOrder}>Add Order</button>
-                    <h4 className="orderConfirmation">{confirmation}</h4>
-                </section>
+              <section className="product-details">
+                  <h3>{singleProduct.name}</h3>
+                  <p>${singleProduct.price}</p>
+                  <p>{singleProduct.description}</p>
+                  <p>Quantity: {singleProduct.quantity - singleProduct.total_sold}</p>
+                  <br/>
+                  <button onClick = {addToOrder}>Add Order</button>
+                  <h4 className="orderConfirmation">{confirmation}</h4>
+              </section>
             }
         </>
     )

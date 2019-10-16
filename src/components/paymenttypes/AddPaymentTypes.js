@@ -47,57 +47,51 @@ const AddPaymentTypes = props => {
 
   return (
     <>
-      <h3>Existing Payment Types</h3>
-      <div className="paymentTypeItems">
-        {paymenttypeList.map(item => {
-          return (
-            <div key={item.id}>
-              <p>{item.merchant_name}</p>
-            </div>
-          );
-        })}
-      </div>
-      <h3>Add a Payment Type</h3>
-      <form
-        className="payment-type-form"
-        onSubmit={e => {
-          e.preventDefault();
-          createPayment()
-          props.history.push("/deletepayment")
-        }}
-      >
-        <fieldset>
-          <label htmlFor="merchant">Merchant:</label>
-          <input type="text" ref={merchant} name="merchant" required></input>
-        </fieldset>
-        <fieldset>
-          <label htmlFor="account-number">Account Number:</label>
+      <div>
+        <h3>Add a New Payment Type</h3>
+        <br />
+        <form
+          className="payment-type-form"
+          onSubmit={e => {
+            e.preventDefault();
+            createPayment()
+            props.history.push("/deletepayment")
+          }}
+        >
+          <fieldset>
+            <label htmlFor="merchant">Merchant:</label>
+            <input type="text" ref={merchant} name="merchant" required></input>
+          </fieldset>
+          <fieldset>
+            <label htmlFor="account-number">Account Number:</label>
+            <input
+              type="text"
+              ref={accountNumber}
+              name="account-number"
+              required
+            ></input>
+          </fieldset>
+          <fieldset>
+            <label htmlFor="expire-date">Expiration Date:</label>
+            <input
+              type="month"
+              ref={expireDate}
+              name="expire-date"
+              min={new Date().toISOString().slice(0, 7)}
+              required
+            ></input>
+          </fieldset>
           <input
-            type="text"
-            ref={accountNumber}
-            name="account-number"
-            required
-          ></input>
-        </fieldset>
-        <fieldset>
-          <label htmlFor="expire-date">Expiration Date:</label>
-          <input
-            type="month"
-            ref={expireDate}
+            type="date"
+            ref={createDate}
             name="expire-date"
-            min={new Date().toISOString().slice(0, 7)}
-            required
+            defaultValue={new Date().toISOString().slice(0, 10)}
+            hidden
           ></input>
-        </fieldset>
-        <input
-          type="date"
-          ref={createDate}
-          name="expire-date"
-          defaultValue={new Date().toISOString().slice(0, 10)}
-          hidden
-        ></input>
-        <button type="submit">Add Payment</button>
-      </form>
+          <br />
+          <button type="submit">Add Payment</button>
+        </form>
+      </div>
     </>
   );
 };

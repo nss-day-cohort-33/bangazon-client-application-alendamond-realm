@@ -40,6 +40,22 @@ const OrderList = props => {
     .then(props.history.push("/"))
   }
 
+  const deleteProductFromCart = (item_id) => {
+    fetch(`http://localhost:8000/orders/${open_order.id}`, {
+      method: "PUT",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": `Token ${localStorage.getItem("token")}`
+      },
+      body: JSON.stringify({
+        payment_type_id: null,
+        item_id: item_id
+      })
+    })
+    .then(getOpenOrder)
+  }
+  let count = 0
   return (
     // console.log("open orders", open_order),
     <>
@@ -48,8 +64,11 @@ const OrderList = props => {
         <h2>My Cart</h2>
         <ul>
           {
-            open_order.line_items.map((item, index) => {
-                return <li key={index}>{item.name}: ${item.price}</li>
+
+            open_order.line_items.map(item => {
+                return (<li key={count++}>{item.name}: ${item.price}
+                <button onClick={() => deleteProductFromCart(item.id)}>Remove From Cart</button>
+                </li>)
               })
           }
         </ul>

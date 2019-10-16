@@ -23,26 +23,17 @@ const SelectPayment = props => {
     }
 
     const addPaymentToOrder = () => {
-    fetch(`http://localhost:8000/orders/${openOrder.id}`, {
-        "method": "PUT",
-        "headers": {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-            "Authorization": `Token ${localStorage.getItem("token")}`
-        },
-        "body": JSON.stringify({
-            "payment_type_id": payment_type.current.value
+        fetch(`http://localhost:8000/orders/${openOrder.id}`, {
+            "method": "PUT",
+            "headers": {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("token")}`
+            },
+            "body": JSON.stringify({
+                "payment_type_id": payment_type.current.value
+            })
         })
-    })
-        .then(() => {
-            console.log("Edited")
-            // setConfirmation("Your order has been received. Thank you for shopping with Bangazon.")
-            // setTimeout(() => {
-            //   setConfirmation("")
-            //   toggleDialog(false)
-            // }, 2000);
-        })
-
     }
 
     const getAllPaymentTypes = () => {
@@ -86,7 +77,7 @@ const SelectPayment = props => {
                     name="payment_type"
                     ref={payment_type}
                 >
-                    {/* <option>Select Payment Type</option> */}
+                    {/* <option>Select a Payment Type</option> */}
                     {paymenttypeList.map(item => {
                     return (
                         <option key={item.id} value={item.id}>
@@ -95,7 +86,7 @@ const SelectPayment = props => {
                     );
                     })}
                     </select>
-                <button onClick={() => {addPaymentToOrder(); toggleDialog(true)}}>Select</button>
+                <button onClick={() => {addPaymentToOrder(); toggleDialog(true)}}>Place order</button>
                 <br />
                 <Link to="/addpayment">Add a new payment type</Link>
             </div>

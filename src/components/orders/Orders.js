@@ -1,7 +1,7 @@
 import APIManager from "../../modules/APIManager";
 import React, { useEffect, useState } from "react";
 import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
-import SelectPayment from "../paymenttypes/SelectPaymentTypes";
+import SelectPayment from "../paymenttypes/SelectPaymentType";
 
 // Author: Curt Cato
 // Purpose: Provide the user with a view of open orders
@@ -54,7 +54,7 @@ const OrderList = props => {
           }
         </ul>
         {/* <button onClick={confirmOrder}>Add Payment to complete order</button> */}
-        <SelectPayment {...props} />
+        <SelectPayment {...props} open_order={open_order}/>
         <br />
         <button className="btn-danger" onClick={cancelOrder}>Cancel order</button>
       </main>

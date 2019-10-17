@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import SelectPayment from "../paymenttypes/SelectPaymentType";
 
 const OrderHistory = props => {
 
@@ -18,22 +17,9 @@ const OrderHistory = props => {
     .then(setOrders)
   }
 
-//   const getMyOrders = () => {
-//     fetch("http://localhost:8000/orders?orderlist=false", {
-//       method: "GET",
-//       headers: {
-//         "Content-Type": "application/json",
-//         "Accept": "application/json",
-//         "Authorization": `Token ${localStorage.getItem("token")}`
-//       }
-//     })
-//     .then(response => response.json())
-//     .then(setOrders)
-//   }
 
   useEffect(getMyOrders, [])
 
-  console.log(allOrders)
   return (
       <>
         <div className="order-items">

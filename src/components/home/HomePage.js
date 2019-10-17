@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react"
-import APIManager from "../../modules/APIManager"
 import { Link } from 'react-router-dom'
 
 // This creates
@@ -51,7 +50,6 @@ const HomePage = props => {
             <div>
                 {
                     products.map(item => {
-                        console.log(item)
                         return(<div key={item.id} className={`productId-${item.id}`}>
                             <Link className="nav-link" to={`/products/${item.id}`}>
                             <p>{item.name}</p>

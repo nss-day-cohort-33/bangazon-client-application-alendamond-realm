@@ -39,7 +39,6 @@ export default Object.create(null, {
   },
   post: {
     value: function (name, newPost) {
-      console.log("post", name, newPost)
       return fetch(`${remoteURL}/${name}`, {
         "method": "POST",
         "headers": {

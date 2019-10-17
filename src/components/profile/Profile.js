@@ -14,7 +14,6 @@ const CustomerProfile = props => {
     if (isAuthenticated()) {
       APIManager.getAll("customers").then(customer => {
         setProfile(customer);
-        // console.log("customer", customer);
       });
     }
   };

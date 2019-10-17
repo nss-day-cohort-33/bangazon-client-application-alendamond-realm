@@ -1,6 +1,4 @@
 import React, { useRef, useEffect, useState } from "react";
-import { withRouter } from "react-router-dom";
-import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
 import APIManager from "../../modules/APIManager";
 // import Login.css from "../../"
 

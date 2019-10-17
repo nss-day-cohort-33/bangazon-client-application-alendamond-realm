@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import APIManager from "../../modules/APIManager";
+
 
 //Author: Amber Gooch
 //Purpose: Allow a user to view full list of products by category
@@ -39,7 +39,6 @@ const ProductTypeDetails = props => {
       });
   };
 
-  // Create useEffect()
   useEffect(() => {
     getSingleType();
     getProducts();

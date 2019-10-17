@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import APIManager from "../../modules/APIManager";
+
 
 //Author: Amber Gooch
 //Purpose: Allow a user to view order details
@@ -34,7 +33,6 @@ const OrderDetails = props => {
     }, [])
 
     // Create HTML representation with JSX
-    console.log(singleOrder.payment_type.acct_number)
     return (
         <>
         <h2>Order #{singleOrder.id}</h2>

@@ -19,24 +19,5 @@ const MyProducts = props => {
           })
         }).then(getMyProducts);
       };
-    return (
-        <>
-        {myProducts.map(products => {
-          if (products.quantity.isnull = False) {
-            return (
-              <div>
-            <fieldset>
-              <label htmlFor="inputAddress"> Address </label>
-              <input
-                ref={address}
-                type="text"
-                name="address"
-                className="form-control"
-                defaultValue={profile.address}
-                required
-              />
-            </fieldset>
-            </div>
-        </>
-            )
+
           }

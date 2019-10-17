@@ -7,7 +7,9 @@ import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
 
 const MyProducts = props => {
   const [myProducts, setMyProducts] = useState([]);
+  const [myQuantity, setMyQuantity] = useState({});
   const { isAuthenticated } = useSimpleAuth();
+  const quantity = useRef()
 
   // this fetch call gets all the products that are specific to this user. It takes a query param of customer id, which we have saved in local storage. That's why it isn't being passed in as an argument
 
@@ -69,15 +71,14 @@ const MyProducts = props => {
               <li>{myproduct.price}</li>
               <li>Description: {myproduct.description}</li>
               <li>Quantity: {myproduct.quantity - myproduct.total_sold}<a href="/productquantity"> update</a></li>
-<li>Sold: {myproduct.total_sold}</li>
-<br />
-<button onClick={() => deleteMyProduct(myproduct.id)}>
-  Delete
-</button>
-
-<button onClick={() => updateMyProduct(myproduct.quantity, myproduct.id).then (props.history.push("/myproducts"))}>
-  Update Quantity
-</button>
+              <li>Sold: {myproduct.total_sold}</li>
+              <br />
+            <button onClick={() => deleteMyProduct(myproduct.id)}>
+            Delete
+            </button>
+            <button onClick={() => updateMyProduct(myproduct.quantity, myproduct.id).then (props.history.push("/myproducts"))}>
+            Update Quantity
+            </button>
             </ul>
           </div>
         );

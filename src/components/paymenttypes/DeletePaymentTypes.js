@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react"
+import React, { useEffect, useState } from "react"
 import APIManager from "../../modules/APIManager"
 
 
@@ -10,7 +10,7 @@ const DeletePaymentTypes = props => {
         APIManager.delete("paymenttypes", idToDelete).then(() => {
             APIManager.getAll("paymenttypes")
                 .then((allTheItems) => {
-                    console.log("from payment types", allTheItems)
+
                     setPaymentTypeList(allTheItems)
                 })
         })
@@ -19,7 +19,6 @@ const DeletePaymentTypes = props => {
     const getAllPaymentTypes = () => {
         APIManager.getAll("paymenttypes")
             .then((allTheItems) => {
-                console.log("from payment types--getAll function", allTheItems)
                 setPaymentTypeList(allTheItems)
             })
     }
@@ -38,7 +37,6 @@ const DeletePaymentTypes = props => {
                             <p>{item.merchant_name}</p>
                             <div>
                                 <button className="btn btn-primary mb-2" onClick={() => handleOnClickDeletePaymentTypeButton(item.id)}>Delete Payment Type</button>
-                                {console.log("payment type item id", item.id)}
                             </div>
                         </div>
                     })

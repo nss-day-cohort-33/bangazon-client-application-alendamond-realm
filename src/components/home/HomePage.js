@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react"
-import APIManager from "../../modules/APIManager"
 import { Link } from 'react-router-dom'
 
 // This creates
@@ -7,8 +6,9 @@ const HomePage = props => {
     const [products, setProducts] = useState([])
     const city = useRef()
 
+
     const getQuantity = () => {
-        fetch(`http://localhost:8000/products?quantity=20`, {
+        fetch(`http://localhost:8000/products?quantity=20&order_by=created_at&direction=desc`, {
             "method": "GET",
             "headers": {
               "Accept": "application/json",
@@ -51,7 +51,6 @@ const HomePage = props => {
             <div>
                 {
                     products.map(item => {
-                        console.log(item)
                         return(<div key={item.id} className={`productId-${item.id}`}>
                             <Link className="nav-link" to={`/products/${item.id}`}>
                             <p>{item.name}</p>

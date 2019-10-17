@@ -13,17 +13,14 @@ const MyProducts = props => {
 
   const getMyProducts = () => {
     if (isAuthenticated()) {
-      fetch(
-        `http://localhost:8000/products`,
-        {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Token ${localStorage.getItem("token")}`
-          },
+      fetch(`http://localhost:8000/products`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Token ${localStorage.getItem("token")}`
         }
-      )
+      })
         .then(e => e.json())
         .then(setMyProducts);
     }
@@ -40,12 +37,26 @@ const MyProducts = props => {
     }
   };
 
+  const updateMyProduct = (quantity, id) => {
+    fetch(`http://localhost:8000/products/${id}`, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Token ${localStorage.getItem("token")}`
+      },
+      body: JSON.stringify({
+        quantity: quantity
+      })
+    }).then(getMyProducts);
+  };
+
   // // Create useEffect
   useEffect(() => {
     getMyProducts();
   }, []);
 
-// Create HTML representation with JSX
+  // Create HTML representation with JSX
 
   return (
     <>
@@ -62,6 +73,9 @@ const MyProducts = props => {
               <br />
               <button onClick={() => deleteMyProduct(myproduct.id)}>
                 Delete
+              </button>
+              <button onClick={() => updateMyProduct(myproduct.quantity, myproduct.id)}>
+                Update Quantity
               </button>
             </ul>
           </div>

@@ -67,7 +67,6 @@ const SelectPayment = props => {
                     name="payment_type"
                     ref={payment_type}
                 >
-                    {/* <option>Select a Payment Type</option> */}
                     {paymenttypeList.map(item => {
                     return (
                         <option key={item.id} value={item.id}>

@@ -40,7 +40,7 @@ const MyProducts = props => {
     }
   };
 
-  // // Create useEffect()
+  // // Create useEffect
   useEffect(() => {
     getMyProducts();
   }, []);

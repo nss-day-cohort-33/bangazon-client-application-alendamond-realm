@@ -50,7 +50,6 @@ const OrderList = props => {
     .then(getOpenOrder)
   }
   let count = 0
-  console.log(open_order)
   return (
     <>
      {open_order.line_items.length > 0 ?

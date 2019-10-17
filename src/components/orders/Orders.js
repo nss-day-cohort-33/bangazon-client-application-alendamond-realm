@@ -56,6 +56,7 @@ const OrderList = props => {
     .then(getOpenOrder)
   }
   let count = 0
+  console.log(open_order)
   return (
     // console.log("open orders", open_order),
     <>

@@ -7,8 +7,9 @@ const HomePage = props => {
     const [products, setProducts] = useState([])
     const city = useRef()
 
+
     const getQuantity = () => {
-        fetch(`http://localhost:8000/products?quantity=20`, {
+        fetch(`http://localhost:8000/products?quantity=20&order_by=created_at&direction=desc`, {
             "method": "GET",
             "headers": {
               "Accept": "application/json",

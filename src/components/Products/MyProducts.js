@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import APIManager from "../../modules/APIManager";
 import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
 
 // //Author: Scott Silver
@@ -42,12 +40,12 @@ const MyProducts = props => {
     }
   };
 
-  // // Create useEffect()
+  // // Create useEffect
   useEffect(() => {
     getMyProducts();
   }, []);
 
-  //     // Create HTML representation with JSX
+// Create HTML representation with JSX
 
   return (
     <>

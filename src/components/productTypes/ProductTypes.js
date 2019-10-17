@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Link } from 'react-router-dom'
-import APIManager from "../../modules/APIManager"
+
 
 //Author: Amber Gooch
 //Purpose: Allow a user to view all product categories with a list of 3 products of that type

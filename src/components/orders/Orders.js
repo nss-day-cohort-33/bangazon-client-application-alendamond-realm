@@ -1,6 +1,4 @@
-import APIManager from "../../modules/APIManager";
 import React, { useEffect, useState } from "react";
-import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
 import SelectPayment from "../paymenttypes/SelectPaymentType";
 
 // Author: Curt Cato
@@ -25,10 +23,6 @@ const OrderList = props => {
   }
 
   useEffect(getOpenOrder, [])
-
-  const confirmOrder = () => {
-    props.history.push("/payment")
-  }
 
   const cancelOrder = () => {
     fetch(`http://localhost:8000/orders/${open_order.id}`, {
@@ -57,7 +51,6 @@ const OrderList = props => {
   }
   let count = 0
   return (
-    // console.log("open orders", open_order),
     <>
      {open_order.line_items.length > 0 ?
       <main className="order-items">
@@ -72,7 +65,6 @@ const OrderList = props => {
               })
           }
         </ul>
-        {/* <button onClick={confirmOrder}>Add Payment to complete order</button> */}
         <SelectPayment {...props} open_order={open_order}/>
         <br />
         <button className="btn-danger" onClick={cancelOrder}>Cancel order</button>

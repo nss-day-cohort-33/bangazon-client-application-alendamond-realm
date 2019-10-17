@@ -98,6 +98,15 @@ const ApplicationViews = () => {
                     }
                 }}
             />
+            <Route
+                path="/pruductquantity" render={props => {
+                    return (
+                        <>
+                            <MyProducts {...props} />
+                        </>
+                    )
+                }}
+            />
 
             <Route
                 exact path="/products" render={props => {

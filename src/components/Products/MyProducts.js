@@ -68,15 +68,16 @@ const MyProducts = props => {
               <li>{myproduct.name}</li>
               <li>{myproduct.price}</li>
               <li>Description: {myproduct.description}</li>
-              <li>Quantity: {myproduct.quantity - myproduct.total_sold}</li>
-              <li>Sold: {myproduct.total_sold}</li>
-              <br />
-              <button onClick={() => deleteMyProduct(myproduct.id)}>
-                Delete
-              </button>
-              <button onClick={() => updateMyProduct(myproduct.quantity, myproduct.id)}>
-                Update Quantity
-              </button>
+              <li>Quantity: {myproduct.quantity - myproduct.total_sold}<a href="/productquantity"> update</a></li>
+<li>Sold: {myproduct.total_sold}</li>
+<br />
+<button onClick={() => deleteMyProduct(myproduct.id)}>
+  Delete
+</button>
+
+<button onClick={() => updateMyProduct(myproduct.quantity, myproduct.id).then (props.history.push("/myproducts"))}>
+  Update Quantity
+</button>
             </ul>
           </div>
         );
@@ -86,3 +87,5 @@ const MyProducts = props => {
 };
 
 export default MyProducts;
+
+

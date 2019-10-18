@@ -40,6 +40,7 @@ const MyProduct = props => {
     getMyProduct();
   }, []);
 
+
   return (
     <>
       <h1>My Product</h1>
@@ -48,11 +49,16 @@ const MyProduct = props => {
               <li>{myProduct.name}</li>
               <li>${myProduct.price}</li>
               <li>Description: {myProduct.description}</li>
-              {/* <input > */}
-              <li>
-                Current Inventory: {}
+
+              <li>Current Inventory: {}
+              <input ref={current_inventory}
+                type="text"
+                name="current_inventory"
+                defaultValue={myProduct.quantity}
+                required ></input>
+
               </li>
-              {/* </input> */}
+
               <li>Sold: {myProduct.total_sold}</li>
               <br />
               <button

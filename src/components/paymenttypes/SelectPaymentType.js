@@ -5,7 +5,7 @@ import useModal from "../../hooks/ui/useModal"
 
 const SelectPayment = props => {
     const [paymenttypeList, setPaymentTypeList] = useState([])
-    const [openOrder, setOrder] = useState([])
+    const [openOrder, setOrder] = useState({line_items: []})
     const { toggleDialog, modalIsOpen } = useModal("#order-dialog")
     const payment_type = useRef();
 
@@ -30,8 +30,9 @@ const SelectPayment = props => {
                 "Content-Type": "application/json",
                 "Authorization": `Token ${localStorage.getItem("token")}`
             },
-            "body": JSON.stringify({
-                "payment_type_id": payment_type.current.value
+            body: JSON.stringify({
+                payment_type_id: +(payment_type.current.value),
+                item_id: null
             })
         })
     }
@@ -73,9 +74,9 @@ const SelectPayment = props => {
                         {item.merchant_name}
                         </option>
                     );
-                    })}
+                })}
                     </select>
-                <button onClick={() => {addPaymentToOrder(); toggleDialog(true)}}>Place order</button>
+                            <button onClick={() => {addPaymentToOrder(); toggleDialog(true)}}>Place order</button>
                 <br />
                 <Link to="/addpayment">Add a new payment type</Link>
             </div>

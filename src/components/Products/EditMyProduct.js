@@ -53,12 +53,11 @@ const MyProduct = props => {
             <li>Description: {myProduct.description}</li>
 
             <li>
-              Current Inventory: {}
+              Enter number of new stock: {}
               <input
                 ref={current_inventory}
                 type="text"
                 name="current_inventory"
-                defaultValue={myProduct.quantity}
                 required
               ></input>
             </li>

@@ -90,15 +90,6 @@ const MyProducts = props => {
               <button onClick={() => deleteMyProduct(myproduct.id)}>
                 Delete
               </button>
-              <button
-                onClick={() =>
-                  updateMyProduct(myproduct.quantity, myproduct.id).then(
-                    props.history.push("/myproducts")
-                  )
-                }
-              >
-                Update Quantity
-              </button>
             </ul>
           </div>
         );

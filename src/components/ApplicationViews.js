@@ -16,7 +16,9 @@ import ProductTypeDetails from "./productTypes/ProductTypeDetails"
 import ProductDetail from "./Products/ProductDetail"
 import SellProductForm from "./Products/SellProductForm"
 import MyProducts from "./Products/MyProducts"
+import EditMyProduct from "./Products/EditMyProduct"
 import UpdateUser from "./profile/EditProfile"
+
 
 
 
@@ -99,10 +101,10 @@ const ApplicationViews = () => {
                 }}
             />
             <Route
-                path="/pruductquantity" render={props => {
+                path="/myproducts/:myproductId(\d+)" render={props => {
                     return (
                         <>
-                            <MyProducts {...props} />
+                            <EditMyProduct {...props} />
                         </>
                     )
                 }}

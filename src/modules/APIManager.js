@@ -15,7 +15,7 @@ export default Object.create(null, {
   },
   getMy: {
     value: function (myproducts) {
-      return fetch(`${remoteURL}/${myproducts}?customer=${localStorage.getItem("user_id")}`, {
+      return fetch(`${remoteURL}/${myproducts}`, {
         "method": "GET",
         "headers": {
           "Accept": "application/json",

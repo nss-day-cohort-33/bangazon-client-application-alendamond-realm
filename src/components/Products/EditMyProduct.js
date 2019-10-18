@@ -46,7 +46,6 @@ const MyProduct = props => {
 
   return (
     <>
-      <form onSubmit={updateMyProduct}>
         <div key={myProduct.id} className="card">
           <ul>
             <li>{myProduct.name}</li>
@@ -68,16 +67,14 @@ const MyProduct = props => {
             <br />
             <button
               onClick={() =>
-                updateMyProduct(myProduct.quantity, myProduct.id).then(
-                  props.history.push("/myproducts")
-                )
+                updateMyProduct(myProduct.quantity, myProduct.id)
               }
             >
               Update Quantity
             </button>
           </ul>
         </div>
-      </form>
+
       );
     </>
   );

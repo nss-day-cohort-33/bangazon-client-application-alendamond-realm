@@ -51,7 +51,6 @@ const MyProduct = props => {
             <li>{myProduct.name}</li>
             <li>${myProduct.price}</li>
             <li>Description: {myProduct.description}</li>
-
             <li>
               Enter number of new stock: {}
               <input
@@ -73,8 +72,6 @@ const MyProduct = props => {
             </button>
           </ul>
         </div>
-
-      );
     </>
   );
 };

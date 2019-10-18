@@ -54,17 +54,6 @@ const MyProducts = props => {
     }).then(getMyProducts);
   };
 
-  //   const getOneMyProduct = (id) => {
-  //     if (isAuthenticated()) {
-  //       fetch(`http://localhost:8000/products/${id}`, {
-  //         method: "GET",
-  //         headers: {
-  //           Accept: "application/json",
-  //           "Content-Type": "application/json",
-  //           Authorization: `Token ${localStorage.getItem("token")}`
-  //         }
-  //       })
-
   // // Create useEffect
   useEffect(() => {
     getMyProducts();

@@ -52,14 +52,10 @@ const ProductTypes = props => {
                 <div className="productTypes">
                 {
                     productTypesList.map((type) => {
-                        const count = productsList.filter((product) => {
-                            return type.id === product.product_type_id}).length
-
-                        console.log(type)
                         return (
                             <div key={type.id}>
                                 <Link to={`/productlist/${type.id}`}>
-                                    <h5>{type.name} ({count})</h5>
+                                    <strong>{type.name} ({type.total_products})</strong>
                                 </Link>
                                 {type.products.map((product) => {
                                     return (

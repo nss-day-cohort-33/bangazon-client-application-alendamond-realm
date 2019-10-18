@@ -12,7 +12,7 @@ const ProductTypes = props => {
     const [productsList, setProductsList] = useState([])
 
     const getProductTypes= () => {
-        fetch(`http://localhost:8000/producttypes`, {
+        fetch("http://localhost:8000/producttypes?includeproducts=true", {
             "method": "GET",
             "headers": {
               "Accept": "application/json",
@@ -52,16 +52,16 @@ const ProductTypes = props => {
                 <div className="productTypes">
                 {
                     productTypesList.map((type) => {
-                        const filtered = productsList.filter((product) => {
-                            return type.id === product.product_type_id})
+                        const count = productsList.filter((product) => {
+                            return type.id === product.product_type_id}).length
 
+                        console.log(type)
                         return (
                             <div key={type.id}>
-                                <strong>{type.name} </strong>
-                                (<Link to={`/productlist/${type.id}`}>
-                                    {filtered.length}
-                                </Link>)
-                                {filtered.slice(0, 3).map((product) => {
+                                <Link to={`/productlist/${type.id}`}>
+                                    <h5>{type.name} ({count})</h5>
+                                </Link>
+                                {type.products.map((product) => {
                                     return (
                                         <Link key={product.id} className="nav-link" to={`/products/${product.id}`}>
                                             <li>{product.name}</li>

@@ -8,12 +8,10 @@ import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
 
 const MyProducts = props => {
   const [myProducts, setMyProducts] = useState([]);
-
   const { isAuthenticated } = useSimpleAuth();
-  //   const quantity = useRef()
+
 
   // this fetch call gets all the products that are specific to this user. It takes a query param of customer id, which we have saved in local storage. That's why it isn't being passed in as an argument
-
   const getMyProducts = () => {
     if (isAuthenticated()) {
       fetch(`http://localhost:8000/products`, {

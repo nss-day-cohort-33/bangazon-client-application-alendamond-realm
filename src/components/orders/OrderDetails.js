@@ -26,6 +26,7 @@ const OrderDetails = props => {
     })
       .then(response => response.json())
       .then(response => {
+          console.log(response)
         setOrder(response);
       });
   };
@@ -49,7 +50,7 @@ const OrderDetails = props => {
       rating: ratingValue
     };
 
-    APIManager.post("productratings", newRatingInfo).then(getOrder);
+    APIManager.post("productratings", newRatingInfo).then(getOrder());
   };
 
   // Create HTML representation with JSX
@@ -59,6 +60,7 @@ const OrderDetails = props => {
       <br />
       <div>
         {singleOrder.line_items.map((item, index) => {
+            if (item.average_rating < 1) {
           return (
             <table key={index} className="table table-sm table-borderless">
               <tbody>
@@ -66,6 +68,7 @@ const OrderDetails = props => {
                   <th style={{ width: "30%" }}>{item.name}</th>
 
                   <td>${item.price}</td>
+
                   <td>
                     <div className="form-check">
                       <label>
@@ -145,7 +148,10 @@ const OrderDetails = props => {
                 </tr>
               </tbody>
             </table>
-          );
+          )}
+            else return (
+                <div>{item.name} has the average rating of: {item.average_rating}</div>
+            )
         })}
         <hr />
         <table className="table table-sm table-borderless">

@@ -22,6 +22,7 @@ const CustomerProfile = props => {
     getCustomer();
   }, []);
 
+  console.log(customerProfile)
   return (
     <>
       <main className="explorer">

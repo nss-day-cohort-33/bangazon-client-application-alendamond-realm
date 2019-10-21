@@ -15,7 +15,7 @@ const ProductTypeDetails = props => {
       method: "GET",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       }
     })
       .then(response => response.json())
@@ -30,7 +30,7 @@ const ProductTypeDetails = props => {
       method: "GET",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       }
     })
       .then(response => response.json())

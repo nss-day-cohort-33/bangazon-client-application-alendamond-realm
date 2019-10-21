@@ -5,7 +5,7 @@ import useModal from "../../hooks/ui/useModal"
 
 const SelectPayment = props => {
     const [paymenttypeList, setPaymentTypeList] = useState([])
-    const [openOrder, setOrder] = useState([])
+    const [openOrder, setOrder] = useState({line_items: []})
     const { toggleDialog, modalIsOpen } = useModal("#order-dialog")
     const payment_type = useRef();
 
@@ -80,7 +80,7 @@ const SelectPayment = props => {
                         {item.merchant_name}
                         </option>
                     );
-                    })}
+                })}
                     </select>
                 <button onClick={handleClick}>Place order</button>
                 <br />

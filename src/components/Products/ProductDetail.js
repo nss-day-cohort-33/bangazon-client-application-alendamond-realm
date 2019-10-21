@@ -56,6 +56,7 @@ const ProductDetail = props => {
                   <p>${singleProduct.price}</p>
                   <p>{singleProduct.description}</p>
                   <p>Quantity: {singleProduct.quantity - singleProduct.total_sold}</p>
+                  <p>Average Rating: {singleProduct.average_rating}</p>
                   <br/>
                   <button onClick = {addToOrder}>Add Order</button>
                   <h4 className="orderConfirmation">{confirmation}</h4>

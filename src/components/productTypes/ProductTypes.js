@@ -29,11 +29,12 @@ const ProductTypes = props => {
               method: "GET",
               headers: {
                 Accept: "application/json",
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
               }
             })
               .then(response => response.json())
               .then(response => {
+                  console.log(response)
                 setProductsList(response);
               });
           };

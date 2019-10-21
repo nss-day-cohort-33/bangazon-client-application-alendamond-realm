@@ -150,7 +150,16 @@ const OrderDetails = props => {
             </table>
           )}
             else return (
-                <div>{item.name} has the average rating of: {item.average_rating}</div>
+                <table key={index} className="table table-sm table-borderless">
+                <tbody>
+                <tr>
+                <th style={{ width: "30%" }}>{item.name}</th>
+
+                <td>${item.price}</td>
+                <td>Rating: {item.average_rating}</td>
+                </tr>
+                </tbody>
+                </table>
             )
         })}
         <hr />

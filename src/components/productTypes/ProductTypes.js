@@ -30,7 +30,6 @@ const ProductTypes = props => {
               headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
-                Authorization: `Token ${localStorage.getItem("token")}`
               }
             })
               .then(response => response.json())

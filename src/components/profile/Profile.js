@@ -20,6 +20,7 @@ const CustomerProfile = props => {
 
   useEffect(getCustomer, [])
 
+  console.log(customerProfile)
   return (
     <>
       <main className="explorer">

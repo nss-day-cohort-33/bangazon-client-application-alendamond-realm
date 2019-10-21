@@ -11,7 +11,7 @@ const ProductTypeDetails = props => {
   const [productsList, setProductsList] = useState([]);
 
   const getSingleType = () => {
-    fetch(`http://localhost:8000/products/${props.match.params.productTypeId}`, {
+    fetch(`http://localhost:8000/producttypes/${props.match.params.productTypeId}`, {
       method: "GET",
       headers: {
         Accept: "application/json",

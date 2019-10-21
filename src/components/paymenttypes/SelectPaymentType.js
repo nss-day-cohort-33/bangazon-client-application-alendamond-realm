@@ -31,7 +31,7 @@ const SelectPayment = props => {
                 "Authorization": `Token ${localStorage.getItem("token")}`
             },
             body: JSON.stringify({
-                payment_type_id: +(payment_type.current.value),
+                payment_type_id: payment_type.current.value,
                 item_id: null
             })
         })
@@ -43,11 +43,17 @@ const SelectPayment = props => {
         });
     };
 
+    const handleClick = () => {
+        addPaymentToOrder();
+        toggleDialog(true)
+    }
+
     useEffect(() => {
-    getAllPaymentTypes()
-    getOpenOrder()
+        getAllPaymentTypes()
+        getOpenOrder()
     }, []);
 
+    console.log(openOrder)
     return (
         <>
             <div>
@@ -76,7 +82,7 @@ const SelectPayment = props => {
                     );
                 })}
                     </select>
-                            <button onClick={() => {addPaymentToOrder(); toggleDialog(true)}}>Place order</button>
+                <button onClick={handleClick}>Place order</button>
                 <br />
                 <Link to="/addpayment">Add a new payment type</Link>
             </div>

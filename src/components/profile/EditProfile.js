@@ -49,7 +49,6 @@ const UpdateUser = props => {
               Edit Form
             </h1>
         {customerEdit.map(profile => {
-          if (profile.user_id == localStorage.getItem("user_id")) {
             return (
               <div>
             <fieldset>
@@ -87,7 +86,6 @@ const UpdateUser = props => {
             </fieldset>
             </div>
               );
-            }
           })}
             <fieldset>
               <button type="submit">Submit Update</button>

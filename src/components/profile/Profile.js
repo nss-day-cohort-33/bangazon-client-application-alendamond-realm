@@ -18,15 +18,12 @@ const CustomerProfile = props => {
     }
   };
 
-  useEffect(() => {
-    getCustomer();
-  }, []);
+  useEffect(getCustomer, [])
 
   return (
     <>
       <main className="explorer">
         {customerProfile.map(profile => {
-          if (profile.user_id == localStorage.getItem("user_id")) {
             return (
               <div key={profile.id}>
                 <ul>
@@ -53,7 +50,6 @@ const CustomerProfile = props => {
                 </button>
               </div>
             );
-          }
         })}
       </main>
     </>

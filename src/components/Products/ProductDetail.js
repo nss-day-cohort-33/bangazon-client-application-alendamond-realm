@@ -25,9 +25,7 @@ const ProductDetail = props => {
       };
 
 
-    useEffect(() => {
-        getSingleProduct()
-    }, [])
+    useEffect(getSingleProduct, [])
 
     // Only need to send the product id to Django app. The rest of the process will be handled on the server side
     const addToOrder = () => {

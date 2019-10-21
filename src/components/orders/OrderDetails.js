@@ -28,9 +28,7 @@ const OrderDetails = props => {
         return (parseFloat(prev) + parseFloat(cur.price)).toFixed(2);
     }, 0);
 
-    useEffect(() => {
-        getOrder()
-    }, [])
+    useEffect(getOrder, [])
 
     // Create HTML representation with JSX
     return (

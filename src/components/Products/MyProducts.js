@@ -41,9 +41,7 @@ const MyProducts = props => {
   };
 
   // // Create useEffect
-  useEffect(() => {
-    getMyProducts();
-  }, []);
+  useEffect(getMyProducts, []);
 
 // Create HTML representation with JSX
 

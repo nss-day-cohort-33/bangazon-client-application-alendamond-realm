@@ -6,7 +6,7 @@ import useModal from "../../hooks/ui/useModal"
 const SelectPayment = props => {
     const [paymenttypeList, setPaymentTypeList] = useState([])
     const [openOrder, setOrder] = useState([])
-    const { toggleDialog, modalIsOpen } = useModal("#order-dialog")
+    const { toggleDialog } = useModal("#order-dialog")
     const payment_type = useRef();
 
     const getOpenOrder = () => {

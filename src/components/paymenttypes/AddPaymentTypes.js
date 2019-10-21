@@ -1,9 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
-import APIManager from "../../modules/APIManager";
+import React, { useRef } from "react";
 import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
 
 const AddPaymentTypes = props => {
-  const [paymenttypeList, setPaymentTypeList] = useState([]);
 
   const merchant = useRef();
   const accountNumber = useRef();
@@ -27,22 +25,8 @@ const AddPaymentTypes = props => {
           expiration_date: expire
         })
       })
-        .then(response => response.json())
-        .then(() => {
-          APIManager.getAll("paymenttypes").then(allTheItems => {
-            setPaymentTypeList(allTheItems);
-          });
-        });
     }
   };
-
-  const getAllPaymentTypes = () => {
-    APIManager.getAll("paymenttypes").then(allTheItems => {
-      setPaymentTypeList(allTheItems);
-    });
-  };
-
-  useEffect(getAllPaymentTypes, []);
 
   return (
     <>

@@ -40,8 +40,8 @@ const ProductTypeDetails = props => {
   };
 
   useEffect(() => {
-    getSingleType();
-    getProducts();
+    getSingleType()
+    getProducts()
   }, []);
 
   // Create HTML representation with JSX
